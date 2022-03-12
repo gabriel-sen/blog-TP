@@ -2,7 +2,7 @@
   
 
 <?php
-  $titre="Titre de ma homepage";
+  $titre="Login";
   $content = ob_get_clean();
   require "template.php";
 ?>
