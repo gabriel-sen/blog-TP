@@ -4,20 +4,24 @@
     require_once('model/functions.php');
     $articles = getArticles();
   ?>
-<h1>Liste des articles </h1>
 
 
 
-<?php foreach($articles as $article): ?>
-  <h2>
-    <?= $article->title ?>
-  </h2>
-  <a href="article.php?id=<?= $article->id ?>">
-    Lire la suite de l'article
-  </a>
-<?php endforeach; ?>
+  <?php foreach($articles as $article): ?>
+    <h2>
+      <?= $article->article_title ?>
+    </h2>
+    <p>
+    <?= $article->article_content ?>
+    <ul>
+      <li>Article publié le : <?= $article->article_date ?></li>
+      <li>Auteur : <?= $article->username ?></li>
+    </ul>
+    </p>
+  <?php endforeach; ?>
 
 <?php
+  $titre="Tout les articles :";
   $content = ob_get_clean();
   require "template.php";
 ?>
