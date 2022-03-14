@@ -30,7 +30,10 @@
     </nav>
     <div class="container">
         <h1> <?= $titre ?> </h1>
-        <?= $content ?>
+        <div class="row">
+            <?= $content ?>
+        </div>
+        
     </div>
 
 
