@@ -9,7 +9,6 @@ class Article{
     private $author;
     private $creationDate;
     private $modificationDate;
-    
 
     public function __construct($id,$image,$title,$subTitle,$texte,$author,$creationDate,$modificationDate){
         $this->id = $id;

@@ -4,7 +4,6 @@
     require_once('model/functions.php');
     $articles = getArticles();
 
-
     require_once("class/Article.class.php");
     $article1 = new Article(
         "1",
@@ -50,14 +49,20 @@
       "06/07/1989",
       "06/07/2022",
     );
-    
-    
-    
-    $articles = [$article1,$article2,$article3,$article4];
 
+
+    require_once "class/ArticleManager.class.php";
+    $articleManager = new ArticleManager();
+    $articleManager ->ajouterArticles($article1);
+    $articleManager ->ajouterArticles($article2);
+    $articleManager ->ajouterArticles($article3);
+    $articleManager ->ajouterArticles($article4);
   ?>
 
-  <?php for($i=0; $i <count($articles); $i++): ?>
+  <?php 
+    $articles = $articleManager->getArticles();
+    for($i=0; $i <count($articles); $i++): 
+  ?>
     <div class="col-md-4">
       <div class="card">
       <img src="<?=$articles[$i]->getImage()?>" class="card-img-top" alt="...">
