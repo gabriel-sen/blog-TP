@@ -18,7 +18,7 @@ class Article{
         $this->subtitle = $subTitle;
         $this->texte = $texte;
         $this->author = $author;
-        $this->reationDate = $creationDate;
+        $this->creationDate = $creationDate;
         $this->modificationDate = $modificationDate;
         
     }
@@ -39,12 +39,12 @@ class Article{
     public function setTexte($texte){$this->texte = $texte;}
     
     public function getAuthor(){return $this->author;}
-    public function setAuthor(){$this->author = $author;} 
+    public function setAuthor($author){$this->author = $author;} 
 
-    public function GetCreationDate(){return $this->author;}
-    public function setCreationDate(){$this->creationDate = $creationDate;}
+    public function GetCreationDate(){return $this->creationDate;}
+    public function setCreationDate($creationDate){$this->creationDate = $creationDate;}
            
     public function getModificationDate(){return $this->modificationDate;}
-    public function setModificationDate(){$this->modificationDate = $modificationDate;}
+    public function setModificationDate($modificationDate){$this->modificationDate = $modificationDate;}
 
 }

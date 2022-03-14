@@ -66,7 +66,7 @@
           <h6><?=$articles[$i]->getsubTitle() ?></h6>
           <p class="card-text"><?=$articles[$i]->getTexte()?></p>
           <div class="card_info">
-            <p>Auteur : <?=$articles[$i]->getAuthor()?></>
+            <p>Auteur : <?=$articles[$i]->getAuthor()?></p>
             <p>Article publié le : <?=$articles[$i]->GetCreationDate()?></p>
             <p>Article modifié le : <?=$articles[$i]->getModificationDate()?></p>
           </div>
