@@ -9,21 +9,26 @@ class Article{
     private $author;
     private $creationDate;
     private $modificationDate;
+    private $username;
 
-    public function __construct($id,$image,$title,$subTitle,$texte,$author,$creationDate,$modificationDate){
+    public function __construct($id,$author,$image,$title,$subTitle,$texte,$creationDate,$modificationDate,$username){
         $this->id = $id;
+        $this->author = $author;
         $this->image = $image;
         $this->title = $title;
         $this->subtitle = $subTitle;
         $this->texte = $texte;
-        $this->author = $author;
         $this->creationDate = $creationDate;
         $this->modificationDate = $modificationDate;
-        
+        $this->username = $username;
+
     }
 
     public function getId(){return $this->id;}
     public function setId($id){$this->id = $id;}
+
+    public function getAuthor(){return $this->author;}
+    public function setAuthor($author){$this->author = $author;} 
 
     public function getImage(){return $this->image;}
     public function setImage($image){$this->image = $image;}
@@ -36,14 +41,14 @@ class Article{
     
     public function getTexte(){return $this->texte;}
     public function setTexte($texte){$this->texte = $texte;}
-    
-    public function getAuthor(){return $this->author;}
-    public function setAuthor($author){$this->author = $author;} 
 
     public function GetCreationDate(){return $this->creationDate;}
     public function setCreationDate($creationDate){$this->creationDate = $creationDate;}
            
     public function getModificationDate(){return $this->modificationDate;}
     public function setModificationDate($modificationDate){$this->modificationDate = $modificationDate;}
+
+    public function getUsername(){return $this->username;}
+    public function setUsername($username){$this->username = $username;}
 
 }

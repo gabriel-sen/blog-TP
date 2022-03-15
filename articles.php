@@ -1,67 +1,13 @@
 <?php ob_start() ?>
 
   <?php
-    require_once('model/functions.php');
-    $articles = getArticles();
-
     require_once("class/Article.class.php");
-    $article1 = new Article(
-        "1",
-        "https://th.bing.com/th/id/R.94c0a4d7d4c7fd8db7dbf63d0d6746a4?rik=2Z6OFc2apWD5TQ&pid=ImgRaw&r=0",
-        "Bonjour",
-        "ceci est le titre",
-        "ceci est un sous titre",
-        "ceci est un texte plus ou moins long ca dépreds ",
-        "Jean",
-        "06/07/1989",
-        "06/07/2022",
-      );
-    $article2 = new Article(
-      "2",
-      "https://th.bing.com/th/id/R.94c0a4d7d4c7fd8db7dbf63d0d6746a4?rik=2Z6OFc2apWD5TQ&pid=ImgRaw&r=0",
-      "Bonjour",
-      "ceci est le titre",
-      "ceci est un sous titre",
-      "ceci est un texte plus ou moins long ca dépreds ",
-      "Jean",
-      "06/07/1989",
-      "06/07/2022",
-    );
-    $article3 = new Article(
-        "3",
-        "https://th.bing.com/th/id/R.94c0a4d7d4c7fd8db7dbf63d0d6746a4?rik=2Z6OFc2apWD5TQ&pid=ImgRaw&r=0",
-        "Bonjour",
-        "ceci est le titre",
-        "ceci est un sous titre",
-        "ceci est un texte plus ou moins long ca dépreds ",
-        "Jean",
-        "06/07/1989",
-        "06/07/2022",
-      );
-    $article4 = new Article(
-      "4",
-      "https://th.bing.com/th/id/R.94c0a4d7d4c7fd8db7dbf63d0d6746a4?rik=2Z6OFc2apWD5TQ&pid=ImgRaw&r=0",
-      "Bonjour",
-      "ceci est le titre",
-      "ceci est un sous titre",
-      "ceci est un texte plus ou moins long ca dépreds ",
-      "Jean",
-      "06/07/1989",
-      "06/07/2022",
-    );
-
-
-    require_once "class/ArticleManager.class.php";
-    $articleManager = new ArticleManager();
-    $articleManager ->ajouterArticles($article1);
-    $articleManager ->ajouterArticles($article2);
-    $articleManager ->ajouterArticles($article3);
-    $articleManager ->ajouterArticles($article4);
+    require_once("class/ArticleManager.class.php");
+    $articleManager = new ArticleManager;
   ?>
-
   <?php 
     $articles = $articleManager->getArticles();
-    for($i=0; $i <count($articles); $i++): 
+    for($i=0; $i < count($articles); $i++): 
   ?>
     <div class="col-md-4">
       <div class="card">
@@ -79,9 +25,6 @@
         </div>
       </div>
     </div>
-    
-
-    
   <?php endfor; ?>
 
 <?php
