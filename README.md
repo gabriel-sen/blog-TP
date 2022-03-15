@@ -1,6 +1,8 @@
 # blog-TP
 TP  création de blog
 
+BD dispo da,s "sauvegarde_srv. 
+
 Pour run le front : 
 
 1 - Installer Chocolatery : 
