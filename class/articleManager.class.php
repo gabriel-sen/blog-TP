@@ -14,12 +14,12 @@
         }
 
         public function chargeArticles(){
-            $req = $this->getBdd()->prepare('SELECT articles_id, article_author_id, article_title, article_subtitle, article_content, article_date_creation, article_date_modification, user.username FROM articles INNER JOIN user ON articles.articles_id = user.user_id');
+            $req = $this->getBdd()->prepare('SELECT articles_id, article_author_id, article_image, article_title, article_subtitle, article_content, article_date_creation, article_date_modification, user.username FROM articles INNER JOIN user ON articles.articles_id = user.user_id');
             $req->execute();
-            $mesArticles = $req->fetchAll(PDO::FETCH_ASSOC);
+            $myArticles = $req->fetchAll(PDO::FETCH_ASSOC);
             $req->closeCursor();
 
-            foreach($mesArticles as $article){
+            foreach($myArticles as $article){
                 $a = New Article(
                     $article['articles_id'],
                     $article['article_author_id'],
@@ -29,7 +29,7 @@
                     $article['article_content'],
                     $article['article_date_creation'],
                     $article['article_date_modification'],
-                    $article['[username']);
+                    $article['username']);
                     $this->ajouterArticles($a);
             }
         }

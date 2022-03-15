@@ -4,6 +4,7 @@
     require_once("class/Article.class.php");
     require_once("class/ArticleManager.class.php");
     $articleManager = new ArticleManager;
+    $articleManager->chargeArticles();
   ?>
   <?php 
     $articles = $articleManager->getArticles();
