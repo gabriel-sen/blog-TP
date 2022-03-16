@@ -1,13 +1,11 @@
 <?php ob_start() ?>
 
   <?php
-    require_once("class/Article.class.php");
-    require_once("class/ArticleManager.class.php");
-    $articleManager = new ArticleManager;
-    $articleManager->chargeArticles();
+    require_once("src/model/Article.class.php");
+    require_once("src/model/ArticleManager.class.php");
+
   ?>
   <?php 
-    $articles = $articleManager->getArticles();
     for($i=0; $i < count($articles); $i++): 
   ?>
     <div class="col-md-4">
@@ -31,5 +29,5 @@
 <?php
   $titre="Tout les articles :";
   $content = ob_get_clean();
-  require "template.php";
+  require "template.view.php";
 ?>
