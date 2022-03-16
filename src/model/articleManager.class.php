@@ -1,5 +1,5 @@
 <?php
-    require_once "./model/model.class.php";
+    require_once "./src/model/model.class.php";
     require_once "Article.class.php";
 
     class ArticleManager extends Model{
