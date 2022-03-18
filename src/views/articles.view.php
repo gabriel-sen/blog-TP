@@ -1,8 +1,10 @@
 <?php ob_start() ?>
 
   <?php
-    require_once("src/model/Article.class.php");
+    require_once("src/model/class/Article.class.php");
     require_once("src/model/ArticleManager.class.php");
+    require_once("src/model/class/Comment.class.php");
+    require_once("src/model/CommentManager.class.php");
 
   ?>
   <?php 
@@ -19,6 +21,7 @@
             <p>Auteur : <?=$articles[$i]->getAuthor()?></p>
             <p>Article publié le : <?=$articles[$i]->GetCreationDate()?></p>
             <p>Article modifié le : <?=$articles[$i]->getModificationDate()?></p>
+            <p>Commentaire : </p>
           </div>
           <a href="#" class="btn btn-primary">Lire l'article</a>
         </div>

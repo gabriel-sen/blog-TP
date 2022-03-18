@@ -1,6 +1,6 @@
 <?php
-    require_once "./src/model/model.class.php";
-    require_once "Article.class.php";
+    require_once "model.class.php";
+    require_once "class/Article.class.php";
 
     class ArticleManager extends Model{
         private $articles;
