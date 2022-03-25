@@ -28,12 +28,9 @@
         </ul>
     </div>
     </nav>
-    <div class="container">
+    <div class="container container_articles">
         <h1> <?= $titre ?> </h1>
-        <div class="row">
             <?= $content ?>
-        </div>
-        
     </div>
 
 

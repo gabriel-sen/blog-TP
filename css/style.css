@@ -1,7 +1,10 @@
-.card {
+.container_articles {
+  display: flex;
+}
+.container_articles .card_articles {
   width: 100%;
 }
-.card .card-text {
+.container_articles .card_articles .card-text {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -10,11 +13,15 @@
   line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.card .card_info {
+.container_articles .card_articles .card_info {
   font-size: 0.9rem;
 }
-.card .card_info p {
+.container_articles .card_articles .card_info p {
   margin-bottom: 0.4rem;
+}
+
+.login {
+  background-color: #9A616D;
 }
 
 /*# sourceMappingURL=style.css.map */
