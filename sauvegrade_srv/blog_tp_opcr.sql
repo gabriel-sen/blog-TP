@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 25 mars 2022 à 11:03
+-- Généré le : mer. 20 avr. 2022 à 23:47
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -60,20 +60,22 @@ INSERT INTO `articles` (`articles_id`, `article_author_id`, `article_image`, `ar
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `comment_id` int(11) NOT NULL AUTO_INCREMENT,
-  `comment_author_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `comment_article_id` int(11) NOT NULL,
   `comment_text` text NOT NULL,
   `comment_date` datetime NOT NULL,
   PRIMARY KEY (`comment_id`),
-  KEY `id_article` (`comment_author_id`)
+  KEY `id_article` (`comment_article_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `comments`
 --
 
-INSERT INTO `comments` (`comment_id`, `comment_author_id`, `comment_text`, `comment_date`) VALUES
-(1, 3, 'Ceci est un commentaire ', '2022-03-17 19:35:32'),
-(2, 2, 'Ceci est un commentaire ', '2022-03-17 19:35:32');
+INSERT INTO `comments` (`comment_id`, `user_id`, `comment_article_id`, `comment_text`, `comment_date`) VALUES
+(1, 1, 3, 'Ceci est un commentaire ', '2022-03-17 19:35:32'),
+(2, 2, 2, 'Ceci est un commentaire ', '2022-03-17 19:35:32');
 
 -- --------------------------------------------------------
 
@@ -115,7 +117,8 @@ ALTER TABLE `articles`
 -- Contraintes pour la table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`comment_author_id`) REFERENCES `articles` (`articles_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`comment_article_id`) REFERENCES `articles` (`articles_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
