@@ -20,9 +20,15 @@
         <h6><?=$article->getsubTitle() ?></h6>
         <p class="card-text"><?=$article->getTexte()?></p>
         <div class="card_info">
-          <p>Auteur : <?=$article->getAuthor()?></p>
+          <p>Auteur : <?=$article->getUsername()?></p>
           <p>Article publié le : <?=$article->GetCreationDate()?></p>
           <p>Article modifié le : <?=$article->getModificationDate()?></p>
+          <?php 
+            foreach($article-> getComments() as $comment){
+              echo  "<p> l'auteur : ".$comment->getComAuthor() ."</p>";
+              echo  "<p> le commentaire : ".$comment->getComTexte() ."</p>";
+            }
+          ?>
         </div>
         <a href="/blog-TP/articles" class="btn btn-primary">retourner aux articles</a>
       </div>

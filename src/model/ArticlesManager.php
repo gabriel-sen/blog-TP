@@ -1,10 +1,15 @@
 <?php
     require_once "class/pdo.class.php";
     require_once "class/Article.class.php";
+    require_once "CommentManager.php";
 
     class ArticlesManager extends Model{
         private $articles;
+        private CommentsManager $commentsManager;
 
+        public function __construct(CommentsManager $commentsManager ){
+            $this->commentsManager = $commentsManager;
+        }
         public function ajouterArticles($article){
             $this->articles[] = $article;
         }
@@ -33,10 +38,16 @@
                     $this->ajouterArticles($a);
             }
         }
-        
+
         // AFFICHER ARTICLE SEUL 
         public function getArticle(string $id){
-            $req = $this->getBdd()->prepare('SELECT *, user.username FROM articles INNER JOIN user ON articles.articles_id = user.user_id WHERE articles_id = :id');
+            $req = $this->getBdd()->prepare(
+                'SELECT *, user.username 
+                FROM articles 
+                INNER JOIN user 
+                ON articles.articles_id = user.user_id 
+                WHERE articles_id = :id'
+                );
             $req->bindParam('id', $id, PDO::PARAM_INT);
             $req->execute();
             $article = $req->fetch(PDO::FETCH_ASSOC);
@@ -52,6 +63,9 @@
                 $article['article_content'],
                 $article['article_date_creation'],
                 $article['article_date_modification'],
-                $article['username']);
+                $article['username'],
+                $this->commentsManager -> getComments($id),
+            );
+                
         }
     }

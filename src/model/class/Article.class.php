@@ -10,8 +10,9 @@ class Article{
     private $creationDate;
     private $modificationDate;
     private $username;
+    private array $comments;
 
-    public function __construct($id,$author,$image,$title,$subTitle,$texte,$creationDate,$modificationDate,$username){
+    public function __construct($id,$author,$image,$title,$subTitle,$texte,$creationDate,$modificationDate,$username, array $comments = []){
         $this->id = $id;
         $this->author = $author;
         $this->image = $image;
@@ -21,6 +22,7 @@ class Article{
         $this->creationDate = $creationDate;
         $this->modificationDate = $modificationDate;
         $this->username = $username;
+        $this ->comments = $comments;
 
     }
 
@@ -50,5 +52,8 @@ class Article{
 
     public function getUsername(){return $this->username;}
     public function setUsername($username){$this->username = $username;}
+
+    public function getComments(){return $this->comments;}
+    // addComments()
 
 }

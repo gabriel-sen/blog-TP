@@ -3,29 +3,33 @@
     require_once "class/Comment.class.php";
 
     class CommentsManager extends Model{
-        private $comments;
 
-        public function ajouterComments($comment){
-            $this->comments[] = $comment;
-        }
-
-        public function getComments(){
-            return $this->comments;
-        }
-
-        public function chargeComment(){
-            $req = $this->getBdd()->prepare('SELECT comment_id, comment_author_id, comment_text, comment_date, user.username FROM comments INNER JOIN user ON comments.comment_id = user.user_id');
+        // AFFICHER ARTICLE SEUL 
+        public function getComments(string $articleId){
+            $req = $this->getBdd()->prepare(
+                'SELECT *, user.username 
+                FROM comments 
+                INNER JOIN articles 
+                ON comments.comment_article_id = articles.articles_id 
+                INNER JOIN user 
+                ON  user.user_id = comments.user_id 
+                WHERE articles.articles_id = :articleId');
+            $req->bindParam('articleId', $articleId, PDO::PARAM_INT);
             $req->execute();
-            $myComments = $req->fetchAll(PDO::FETCH_ASSOC);
+            $comments = $req->fetchAll(PDO::FETCH_ASSOC);
+            //die(var_dump($comments));
             $req->closeCursor();
+            
+            $results = [];
 
-            foreach($myComments as $comment){
-                $c = New Comment(
+            foreach($comments as $comment) {
+                $results[] = new Comment(
                     $comment['comment_id'],
                     $comment['username'],
                     $comment['comment_text'],
-                    $comment['comment_date']);
-                    $this->ajouterComments($c);
+                    $comment['comment_date'],
+                    $comment['username']);
             }
+            return $results;
         }
     }
