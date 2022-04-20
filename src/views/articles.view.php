@@ -2,11 +2,12 @@
 
   <?php
     require_once("src/model/class/Article.class.php");
-    require_once("src/model/ArticleManager.class.php");
-    require_once("src/model/class/Comment.class.php");
-    require_once("src/model/CommentManager.class.php");
+    require_once("src/model/ArticlesManager.php");
+    // require_once("src/model/class/Comment.class.php");
+    // require_once("src/model/CommentManager.php");
 
   ?>
+  <div class="container container_articles">
   <?php 
     for($i=0; $i < count($articles); $i++): 
   ?>
@@ -20,13 +21,12 @@
           <p>Auteur : <?=$articles[$i]->getAuthor()?></p>
           <p>Article publié le : <?=$articles[$i]->GetCreationDate()?></p>
           <p>Article modifié le : <?=$articles[$i]->getModificationDate()?></p>
-          <p>Commentaire : </p>
         </div>
-        <a href="#" class="btn btn-primary">Lire l'article</a>
+        <a href="articleContent/<?= $articles[$i]->getId() ?>" class="btn btn-primary">Lire l'article</a>
       </div>
     </div>
   <?php endfor; ?>
-
+  </div>
 <?php
   $titre="Tout les articles :";
   $content = ob_get_clean();

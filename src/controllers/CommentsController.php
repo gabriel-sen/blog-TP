@@ -1,5 +1,5 @@
 <?php
-require_once "src/model/CommentManager.class.php";
+require_once "src/model/CommentManager.php";
 
 class CommentsController{
     private $commentManager; // 4) Cette instance est disponnible dans l'attribut Private

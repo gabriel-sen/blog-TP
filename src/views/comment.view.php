@@ -2,7 +2,7 @@
 
   <?php
     require_once("src/model/class/Comment.class.php");
-    require_once("src/model/CommentManager.class.php");
+    require_once("src/model/CommentManager.php");
 
   ?>
 
@@ -19,7 +19,7 @@
             <p>Article publié le : <?=$comment[$i]->getComTexte()?></p>
 
           </div>
-          <a href="#" class="btn btn-primary">Lire l'article</a>
+          <a href="#" class="btn btn-primary">Lire les commentaires</a>
         </div>
       </div>
     </div>

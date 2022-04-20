@@ -1,5 +1,5 @@
 <?php
-    require_once "./src/model/model.class.php";
+    require_once "class/pdo.class.php";
     require_once "class/Comment.class.php";
 
     class CommentsManager extends Model{
