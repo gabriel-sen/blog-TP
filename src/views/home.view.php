@@ -34,7 +34,12 @@ et l’ensemble des liens vers les réseaux sociaux où l’on peut vous suivre 
         </div>
       <button type="submit" class="btn btn-primary">Envoyer votre message</button>
     </form>
-
+    <p>
+      un lien vers votre CV au format PDF ;
+    </p>
+    <p>
+      et l’ensemble des liens vers les réseaux sociaux où l’on peut vous suivre (GitHub, LinkedIn, Twitter…).
+    </p>
   </div>
 
 <?php
