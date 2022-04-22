@@ -13,6 +13,8 @@ if(empty($_GET['page'])){
       break;
       case "articles" : $articlesController->afficherArticles(); // J'appel la fonction afficher livre présent dans mon controller d'article
       break;
+      case "login" : require "src/views/login.view.php";
+      break;
       case 1 === preg_match('#articleContent\/([\d]+)#', $_GET['page'], $matches) : $articleController->afficherArticle($matches[1]);
       // REGEX
       break;

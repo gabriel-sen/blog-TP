@@ -48,12 +48,12 @@
                 ON articles.articles_id = user.user_id 
                 WHERE articles_id = :id'
                 );
+                
             $req->bindParam('id', $id, PDO::PARAM_INT);
             $req->execute();
             $article = $req->fetch(PDO::FETCH_ASSOC);
             //die(var_dump($article));
             $req->closeCursor();
-
             return new Article(
                 $article['articles_id'],
                 $article['article_author_id'],
@@ -66,6 +66,5 @@
                 $article['username'],
                 $this->commentsManager -> getComments($id),
             );
-                
         }
     }

@@ -17,7 +17,7 @@ class Article{
         $this->author = $author;
         $this->image = $image;
         $this->title = $title;
-        $this->subtitle = $subTitle;
+        $this->subTitle = $subTitle;
         $this->texte = $texte;
         $this->creationDate = $creationDate;
         $this->modificationDate = $modificationDate;
