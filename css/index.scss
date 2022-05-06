@@ -1,2 +1,12 @@
 // style.scss
-@import 'card';
+
+body{
+    position: relative;
+}
+
+@import '_card';
+@import '_login';
+@import '_comments';
+@import '_article';
+@import '_fontawesome';
+@import '_home';
