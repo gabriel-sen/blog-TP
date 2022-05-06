@@ -12,7 +12,7 @@
                 <a class="nav-link" href="/blog-TP/articles">Articles</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/blog-TP/login">Administrateur</a>
+                <a class="nav-link" href="/blog-TP/creat-account">Administrateur</a>
             </li>
         </ul>
     </div>
