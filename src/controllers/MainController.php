@@ -3,14 +3,9 @@
 require_once("src/model/MainManager.php");
 require_once("ToolboxController.php");
 
-class MainController{
-    private $mainManager;
+abstract class MainController{
 
-    public function __construct(){
-        $this->mainManager = new MainManager();
-    }
-
-    private function genererPage($data){
+    protected function genererPage($data){
         extract($data);
         ob_start();
         require_once($view);
@@ -33,7 +28,7 @@ class MainController{
         $this->genererPage($data_page);
     }
 
-    public function pageErreur($msg){
+    protected function pageErreur($msg){
         $data_page = [
             "bodyClass" => "erreur",
             "page_description" => "Page permettant de gérer les erreurs",

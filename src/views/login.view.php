@@ -17,6 +17,7 @@
 </form>
 
 <?php
+  $page_description = "page de login";
   $bodyClass = "login";
   $titre="Login";
   $content = ob_get_clean();

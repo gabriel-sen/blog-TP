@@ -4,8 +4,8 @@ session_start(); // gestion des profiles des utilisateurs
 define("URL", str_replace("index.php","",(isset($_SERVER['HTTPS'])? "https" : "http").
 "://".$_SERVER['HTTP_HOST'].$_SERVER["PHP_SELF"])); // "constante URL" toutes les demandes pointent toujours sur la racide du site.
 
-require_once("src/controllers/MainController.php");
-$mainController = new MainController(); // mon controler pilote toute la logique du site, pour toute les pages
+require_once("src/controllers/VisitorController.php");
+$visitorController = new VisitorController(); // mon controler pilote toute la logique du site, pour toute les pages
 
 require_once "src/controllers/ArticlesController.php";
 $articlesController = new ArticlesController; // J'instancie mon controller d'article
@@ -28,11 +28,11 @@ try {
   switch($page){
       case "compte" : 
           switch($url[1]){
-              case "profil": $mainController->accueil();
+              case "profil": $visitorController->accueil();
               break;
           }
       break;
-      case "home" : $mainController->accueil();
+      case "home" : $visitorController->accueil();
       break;
       case "articles" : $articlesController->afficherArticles(); // J'appel la fonction afficher livre présent dans mon controller d'article
       break;
@@ -46,5 +46,5 @@ try {
       default : throw new Exception("La page n'existe pas");
   }
 } catch (Exception $e){
-  $mainController->pageErreur($e->getMessage());
+  $visitorController->pageErreur($e->getMessage()); // On appel une instance de la fonction pageErreur contenu dans MainController EN PRIVATE
 }

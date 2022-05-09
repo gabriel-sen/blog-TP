@@ -10,4 +10,6 @@ class MainManager extends Model{
         $req->closeCursor();
         return $datas;
     }
+
+
 }

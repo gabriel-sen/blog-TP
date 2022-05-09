@@ -1,16 +1,8 @@
 <?php
 require_once "src/model/articlesManager.php";
 
-class ArticlesController{
+class ArticlesController extends MainController{
     private $articlesManager; // 4) Cette instance est disponnible dans l'attribut Private
-
-    private function genererPage($data){
-        extract($data);
-        ob_start();
-        require_once($view);
-        $content = ob_get_clean();
-        require_once($template);
-    }
 
     public function afficherArticles(){
         $articles = $this->articlesManager->getArticles(); // 5) Je récupère tout mes articles que je stock dans ma variable .
