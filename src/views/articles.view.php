@@ -1,10 +1,6 @@
-<?php ob_start() ?>
-
   <?php
     require_once("src/model/class/Article.class.php");
     require_once("src/model/ArticlesManager.php");
-    // require_once("src/model/class/Comment.class.php");
-    // require_once("src/model/CommentManager.php");
 
   ?>
   <?php 
@@ -36,10 +32,3 @@
       </div>
     </div>
   <?php endfor; ?>
-
-<?php
-$bodyClass = "articles";
-  $titre="Tout les articles :";
-  $content = ob_get_clean();
-  require "template.view.php";
-?>

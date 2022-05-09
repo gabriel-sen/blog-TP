@@ -1,4 +1,3 @@
-<?php ob_start() ?>
 
   <?php
     require_once("src/model/class/Article.class.php");
@@ -47,8 +46,5 @@
       <a href="/blog-TP/articles" class="btn btn-primary">retourner aux articles</a>
   </section>
 <?php
-  $bodyClass = "article";
   $titre= $article->getTitle();
-  $content = ob_get_clean();
-  require "template.view.php";
 ?>

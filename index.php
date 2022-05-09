@@ -21,20 +21,18 @@ try {
   if(empty($_GET['page'])){ // si page existe alors tu m'execute la condition suivante avec un break pour chaque cas 
       $page = "home";
   } else {
-      $url = explode("/", filter_var($_GET['page'],FILTER_SANITIZE_URL));
-      $page = $url[0];
+      $url = explode("/", filter_var($_GET['page'],FILTER_SANITIZE_URL)); // accéder à des sous dossier pour les compte/profile
+      $page = $url[0]; // On stock sous forme de tableau le bon switch case de chaque pages
   }
 
   switch($page){
-      case "accueil" : $mainController->accueil();
-      break;
       case "compte" : 
           switch($url[1]){
               case "profil": $mainController->accueil();
               break;
           }
       break;
-      case "home" : require "src/views/home.view.php";
+      case "home" : $mainController->accueil();
       break;
       case "articles" : $articlesController->afficherArticles(); // J'appel la fonction afficher livre présent dans mon controller d'article
       break;
