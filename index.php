@@ -4,9 +4,16 @@ session_start(); // gestion des profiles des utilisateurs
 define("URL", str_replace("index.php","",(isset($_SERVER['HTTPS'])? "https" : "http").
 "://".$_SERVER['HTTP_HOST'].$_SERVER["PHP_SELF"])); // "constante URL" toutes les demandes pointent toujours sur la racide du site.
 
+require_once "src/model/class/Security.class.php";
+
+// PARTIE DES TYPES D4UTILISATEURS 
 require_once("src/controllers/VisitorController.php");
 $visitorController = new VisitorController(); // mon controler pilote toute la logique du site, pour toute les pages
 
+require_once("src/controllers/UserController.php");
+$userController = new UserController();
+
+// PARTIE DES ARTICLES ET COMENTAIRES 
 require_once "src/controllers/ArticlesController.php";
 $articlesController = new ArticlesController; // J'instancie mon controller d'article
 
@@ -15,6 +22,10 @@ $articleController = new ArticleController; // J'instancie mon controller d'arti
 
 require_once "src/controllers/ArticleController.php";
 $articleController = new ArticleController; // J'instancie mon controller d'article
+
+require_once "src/controllers/ToolboxController.php";
+
+
 
 
 try {
@@ -36,7 +47,18 @@ try {
       break;
       case "articles" : $articlesController->afficherArticles(); // J'appel la fonction afficher livre présent dans mon controller d'article
       break;
-      case "creat-account" : require "src/views/acount-creation.view.php";
+      case "login" : $visitorController->login();
+      break;
+      case "validation_login" : // contrôle sur les informations de routage des données récupérés (je préfère ne pas le faire dans le controller)
+        if(!empty($_POST['login']) && !empty($_POST['password'])){
+            $login = Security::secureHTML($_POST['login']);
+            $password = Security::secureHTML($_POST['password']);
+            $userController->validation_login($login,$password);
+        } else{
+            Toolbox::ajouterMessageAlerte("login ou mot de passe incorecte ", Toolbox::COULEUR_ROUGE);
+            header('Location:'.URL."login");
+        }
+        
       break;
       case 1 === preg_match('#articleContent\/([\d]+)#', $_GET['page'], $matches) : $articleController->afficherArticle($matches[1]); // REGEX
       

@@ -6,13 +6,13 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/blog-TP/home">Accueil</a>
+                <a class="nav-link" href="<?= URL; ?>home">Accueil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/blog-TP/articles">Articles</a>
+                <a class="nav-link" href="<?= URL; ?>articles">Articles</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/blog-TP/creat-account">Administrateur</a>
+                <a class="nav-link" href="<?= URL; ?>login">Se Connecter</a>
             </li>
         </ul>
     </div>
