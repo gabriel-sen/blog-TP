@@ -11,10 +11,11 @@
         }
         public function validation_login($login,$password){
             if($this->userManager->isCombinValid($login,$password)){
-                // echo "réussit";
+                Toolbox::ajouterMessageAlerte("Connection établie", Toolbox::COULEUR_VERTE);
+                header("Location:".URL.'articles');
             } else{
                 Toolbox::ajouterMessageAlerte("Combinaison Login / mot de passe non valide", Toolbox::COULEUR_ROUGE);
-                header('Location:'.URL."login");
+                header("Location:".URL."login");
             }
         }
         public function pageErreur($msg){
