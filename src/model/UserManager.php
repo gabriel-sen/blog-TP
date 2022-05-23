@@ -9,7 +9,8 @@ class UserManager extends MainManager{
         $req->closeCursor();
         return $datas;
     }
+
     public function isCombinValid($login,$password){
-        return false;
+        return true;
     }
 }

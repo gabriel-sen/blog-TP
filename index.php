@@ -4,9 +4,11 @@ session_start(); // gestion des profiles des utilisateurs
 define("URL", str_replace("index.php","",(isset($_SERVER['HTTPS'])? "https" : "http").
 "://".$_SERVER['HTTP_HOST'].$_SERVER["PHP_SELF"])); // "constante URL" toutes les demandes pointent toujours sur la racide du site.
 
+// PARTIE UTILITAIRES
+require_once "src/controllers/ToolboxController.php";
 require_once "src/model/class/Security.class.php";
 
-// PARTIE DES TYPES D4UTILISATEURS 
+// PARTIE DES TYPES D'UTILISATEURS 
 require_once("src/controllers/VisitorController.php");
 $visitorController = new VisitorController(); // mon controler pilote toute la logique du site, pour toute les pages
 
@@ -23,7 +25,7 @@ $articleController = new ArticleController; // J'instancie mon controller d'arti
 require_once "src/controllers/ArticleController.php";
 $articleController = new ArticleController; // J'instancie mon controller d'article
 
-require_once "src/controllers/ToolboxController.php";
+
 
 
 
