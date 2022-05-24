@@ -7,10 +7,10 @@
 
         public function __construct()
         {
-            $this -> userManager = new UserManager();
+            $this->userManager = new UserManager();
         }
         public function validation_login($login,$password){
-            if($this->userManager->isCombinValid($login,$password)){
+            if($this->userManager->isCombinValid($login,$password)){ // On verifie SI l'entrée utilisateur existe bien en BD
                 Toolbox::ajouterMessageAlerte("Connection établie", Toolbox::COULEUR_VERTE);
                 header("Location:".URL.'articles');
             } else{

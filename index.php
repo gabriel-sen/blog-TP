@@ -54,8 +54,11 @@ try {
       case "validation_login" : // contrôle sur les informations de routage des données récupérés (je préfère ne pas le faire dans le controller)
         if(!empty($_POST['login']) && !empty($_POST['password'])){
             $login = Security::secureHTML($_POST['login']);
+            //die(var_dump($login));
             $password = Security::secureHTML($_POST['password']);
+            //die(var_dump($password));
             $userController->validation_login($login,$password);
+            die(var_dump($userController));
         } else{
             Toolbox::ajouterMessageAlerte("login ou mot de passe incorecte ", Toolbox::COULEUR_ROUGE);
             header("Location:".URL.'login');
