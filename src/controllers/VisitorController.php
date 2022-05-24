@@ -12,6 +12,7 @@
 
         public function accueil(){
             $users = $this->visitorManager->getUsers();
+            //echo password_hash("test",PASSWORD_DEFAULT);
 
             $data_page = [
                 "bodyClass" => "home",
