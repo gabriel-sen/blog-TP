@@ -12,11 +12,6 @@ et l’ensemble des liens vers les réseaux sociaux où l’on peut vous suivre 
     <img src="" alt="">
     <h2>Blog de Gabriel SEN</h2>
     <p>Le développeur qu'il vous faut</p>
-    <?php foreach ($users as $users){
-      echo $users["username"] . " - ". $users["email"]; 
-    }
-      
-    ?>
     <form>
         <legend class="mb-4">Exemple de formulaire Bootstrap</legend>
         

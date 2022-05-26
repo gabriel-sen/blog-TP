@@ -41,8 +41,11 @@ try {
   switch($page){
       case "compte" : 
           switch($url[1]){
-              case "profil": $visitorController->accueil();
+              case "profil": $userController->profil();
               break;
+              case "logout": $userController->logout();
+              break;
+              default : throw new Exception("La page n'existe pas");
           }
       break;
       case "home" : $visitorController->accueil();
@@ -58,18 +61,15 @@ try {
             $password = Security::secureHTML($_POST['password']);
             //die(var_dump($password));
             $userController->validation_login($login,$password);
-            die(var_dump($userController));
+            //die(var_dump($userController));
         } else{
             Toolbox::ajouterMessageAlerte("login ou mot de passe incorecte ", Toolbox::COULEUR_ROUGE);
             header("Location:".URL.'login');
         }
-        
       break;
+
       case 1 === preg_match('#articleContent\/([\d]+)#', $_GET['page'], $matches) : $articleController->afficherArticle($matches[1]); // REGEX
-      
       break;
-
-
       default : throw new Exception("La page n'existe pas");
   }
 } catch (Exception $e){

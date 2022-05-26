@@ -11,13 +11,11 @@
 
 
         public function accueil(){
-            $users = $this->visitorManager->getUsers();
             //echo password_hash("test",PASSWORD_DEFAULT); // pour obtenir un hash pour utiliser la fonction Password_verify() qui verifie le hash par lui même.
 
             $data_page = [
                 "bodyClass" => "home",
                 "page_description" => "Description de la page d'accueil",
-                "users" => $users,
                 "titre" => "Titre de la page d'accueil",
                 "view" => "src/views/home.view.php",
                 "template" => "src/views/template.view.php",
