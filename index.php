@@ -45,7 +45,7 @@ try {
               break;
               case "logout": $userController->logout();
               break;
-              default : throw new Exception("La page n'existe pas");
+              default : throw new Exception("La page n'existe pas, "."<a href='../home'>retournez à l'accueil</a>");
           }
       break;
       case "home" : $visitorController->accueil();
@@ -70,7 +70,7 @@ try {
 
       case 1 === preg_match('#articleContent\/([\d]+)#', $_GET['page'], $matches) : $articleController->afficherArticle($matches[1]); // REGEX
       break;
-      default : throw new Exception("La page n'existe pas");
+      default : throw new Exception("La page n'existe pas, "."<a href='home'>retournez à l'accueil</a>");
   }
 } catch (Exception $e){
   $visitorController->pageErreur($e->getMessage()); // On appel une instance de la fonction pageErreur contenu dans MainController EN PRIVATE

@@ -3,7 +3,7 @@ require_once("MainManager.php");
 
 class UserManager extends MainManager{
 
-    // FONCTION DE RECUPERATION DE PASSWORD VIA LE MAIL
+    // FONCTION DE RECUPERATION DE PASSWORD VIA LE CHAMPS MAIL EN BD
     private function getPasswordUser($login){
         $req = "SELECT password FROM user WHERE email = :email"; // on recupère le password dela table user pour l'utilisateur qui as le login qui va être :login 
         $statment = $this->getBdd()->prepare($req); // on prépare la requette 
@@ -35,7 +35,7 @@ class UserManager extends MainManager{
 
         return ((int)$result['is_valid'] === 0) ? false : true; // Si l'entier en champs BD is-valid est égale à zéro = false, sinon true.
     }
-
+    // ON RECUPERE TOUTES LES DONNEES DU COMPTE LOGGEE POUR LES AFFICHER AU PROFILE
     public function getUserInformation($login){
         $req = "SELECT * FROM user WHERE email = :email"; 
         $statment = $this->getBdd()->prepare($req);  
