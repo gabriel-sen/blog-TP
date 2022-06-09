@@ -50,12 +50,17 @@
 
         }
 
-        public function isSubmited(){
-            if(!empty($_POST['name']) && !empty($_POST['forename']) && !empty($_POST['login']) && !empty($_POST['password']))){
+        public function isSubmited($name,$forename,$login,$password){
 
-            } else {
+            if(!empty($_POST['name']) && !empty($_POST['forename']) && !empty($_POST['login']) && !empty($_POST['password'])){
+
+            }else{
                 Toolbox::ajouterMessageAlerte("Veuillez remplire tout les champs du formulaire", Toolbox::COULEUR_ROUGE);
             }
+            
+            return 
 
         }
     }
+
+

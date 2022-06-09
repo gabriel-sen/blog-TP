@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 22 avr. 2022 à 00:46
+-- Généré le : jeu. 09 juin 2022 à 12:51
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -91,7 +91,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `role` int(1) NOT NULL,
+  `img` varchar(255) NOT NULL,
+  `role` varchar(50) NOT NULL,
+  `is_valid` tinyint(1) NOT NULL,
   PRIMARY KEY (`user_id`) USING BTREE,
   KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -100,10 +102,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`user_id`, `username`, `email`, `password`, `role`) VALUES
-(1, 'Jean', '', 'jean1234', 1),
-(2, 'Jeanne', '', 'jeanne1234', 1),
-(3, 'Gabriel', '', 'Gabriel1234', 1);
+INSERT INTO `user` (`user_id`, `username`, `email`, `password`, `img`, `role`, `is_valid`) VALUES
+(1, 'Jean', 'jean@gmail.com', 'jean1234', '', '1', 0),
+(2, 'Jeanne', 'Jeanne@gmail.com\r\n', 'jeanne1234', '', '1', 0),
+(3, 'Gabriel', 'salut.gaby@gmail.com', '$2y$10$btAOvQYaKAesgxjiwPFZZOX4hp5Bn26gaUa0JSLCej4WvFtebQg.q', 'https://st3.depositphotos.com/3489481/18618/i/600/depositphotos_186188634-stock-photo-young-man-selected-as-winnner.jpg', '1', 1);
 
 --
 -- Contraintes pour les tables déchargées
