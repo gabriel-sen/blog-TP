@@ -1,4 +1,3 @@
-<h1><?php $titre ?></h1>
 <form method="POST" action="validation_login">
 
   <div class="mb-10">

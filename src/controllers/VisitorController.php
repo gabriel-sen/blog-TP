@@ -37,4 +37,25 @@
         public function pageErreur($msg){
             parent::pageErreur($msg); // on fait hériter l'objet pageErreur en passant la variable $msg pour y avoir accès sur toutes les pâges des visiteurs
         }
+
+        public function creataccount(){
+            $data_page = [
+                "bodyClass" => "page de création de compte",
+                "page_description" => "page de création de compte",
+                "titre" => "Créez votre compte",
+                "view" => "src/views/creataccount.view.php",
+                "template" => "src/views/template.view.php",
+            ];
+            $this->genererPage($data_page);
+
+        }
+
+        public function isSubmited(){
+            if(!empty($_POST['name']) && !empty($_POST['forename']) && !empty($_POST['login']) && !empty($_POST['password']))){
+
+            } else {
+                Toolbox::ajouterMessageAlerte("Veuillez remplire tout les champs du formulaire", Toolbox::COULEUR_ROUGE);
+            }
+
+        }
     }

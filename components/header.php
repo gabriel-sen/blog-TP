@@ -15,6 +15,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= URL; ?>login">Se Connecter</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= URL; ?>creataccount">Créer un compte</a>
+                </li>
             <?php else : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= URL; ?>compte/profil">Mon profil</a>

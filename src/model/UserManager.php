@@ -45,6 +45,6 @@ class UserManager extends MainManager{
         $statment->closeCursor(); 
         
         return $result;
-        die(var_dump($result));
+        //die(var_dump($result));
     }
 }

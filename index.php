@@ -39,14 +39,21 @@ try {
   }
 
   switch($page){
-      case "compte" : 
-          switch($url[1]){
-              case "profil": $userController->profil();
-              break;
-              case "logout": $userController->logout();
-              break;
-              default : throw new Exception("La page n'existe pas, "."<a href='../home'>retournez à l'accueil</a>");
-          }
+    case "compte" : 
+        if(!Security::islogged()){
+            Toolbox::ajouterMessageAlerte("Veuillez vous connécter", Toolbox::COULEUR_ROUGE);
+            header("Location:".URL.'login');
+        } else{
+
+            switch($url[1]){
+                case "profil": $userController->profil();
+                break;
+                case "logout": $userController->logout();
+                break;
+                default : throw new Exception("La page n'existe pas, "."<a href='../home'>retournez à l'accueil</a>");
+            }
+        }
+
       break;
       case "home" : $visitorController->accueil();
       break;
@@ -67,6 +74,11 @@ try {
             header("Location:".URL.'login');
         }
       break;
+      case "creataccount" : $visitorController->creataccount();
+      break;
+      case "validation_creationaccount" : $visitorController->isSubmited();
+      break;
+      
 
       case 1 === preg_match('#articleContent\/([\d]+)#', $_GET['page'], $matches) : $articleController->afficherArticle($matches[1]); // REGEX
       break;
