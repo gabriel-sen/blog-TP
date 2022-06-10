@@ -47,4 +47,24 @@ class UserManager extends MainManager{
         return $result;
         //die(var_dump($result));
     }
+
+    public function bdCreatAccount($username,$login,$passwordCrypted,$key){
+        $req = "INSERT INTO user (username, email, password, img, role, is_valid, clef) 
+                VALUES (:username, :email, :password, '','user', 0, :clef)";
+        $statment = $this->getBdd()->prepare($req);
+        $statment->bindValue(":username",$username,PDO::PARAM_STR);
+        $statment->bindValue(":email",$login,PDO::PARAM_STR);
+        $statment->bindValue(":password",$passwordCrypted,PDO::PARAM_STR);
+        $statment->bindValue(":clef",$key,PDO::PARAM_INT);
+        $statment->execute();
+        $isChanged = ($statment->rowCount() > 0);
+        $statment->closeCursor();
+        return $isChanged;
+    }
+
+    public function isLoginAvalable($login){
+        $user = $this->getUserInformation($login);
+        return empty($user);
+    }
+
 }

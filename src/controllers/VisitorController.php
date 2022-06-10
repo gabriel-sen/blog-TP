@@ -34,10 +34,6 @@
             $this->genererPage($data_page);
         }
 
-        public function pageErreur($msg){
-            parent::pageErreur($msg); // on fait hériter l'objet pageErreur en passant la variable $msg pour y avoir accès sur toutes les pâges des visiteurs
-        }
-
         public function creataccount(){
             $data_page = [
                 "bodyClass" => "page de création de compte",
@@ -47,19 +43,10 @@
                 "template" => "src/views/template.view.php",
             ];
             $this->genererPage($data_page);
-
         }
 
-        public function isSubmited($name,$forename,$login,$password){
-
-            if(!empty($_POST['name']) && !empty($_POST['forename']) && !empty($_POST['login']) && !empty($_POST['password'])){
-
-            }else{
-                Toolbox::ajouterMessageAlerte("Veuillez remplire tout les champs du formulaire", Toolbox::COULEUR_ROUGE);
-            }
-            
-            return 
-
+        public function pageErreur($msg){
+            parent::pageErreur($msg); // on fait hériter l'objet pageErreur en passant la variable $msg pour y avoir accès sur toutes les pâges des visiteurs
         }
     }
 

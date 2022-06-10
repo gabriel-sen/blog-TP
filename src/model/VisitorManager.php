@@ -9,4 +9,5 @@ class VisitorManager extends MainManager{
         $req->closeCursor();
         return $datas;
     }
+
 }

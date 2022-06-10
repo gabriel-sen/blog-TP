@@ -76,10 +76,17 @@ try {
       break;
       case "creataccount" : $visitorController->creataccount();
       break;
-      case "validation_creationaccount" : $visitorController->isSubmited();
+      case "validation_creationaccount" : 
+        if(!empty($_POST['username']) && !empty($_POST['login']) && !empty($_POST['password'])){
+          $username = Security::secureHTML($_POST['username']);
+          $login = Security::secureHTML($_POST['login']);
+          $password = Security::secureHTML($_POST['password']);
+          $userController->validation_creataccount($username,$login,$password);
+        }else{
+            Toolbox::ajouterMessageAlerte("Veuillez remplire tout les champs du formulaire", Toolbox::COULEUR_ROUGE);
+            header("Location:".URL.'creataccount');
+        }
       break;
-      
-
       case 1 === preg_match('#articleContent\/([\d]+)#', $_GET['page'], $matches) : $articleController->afficherArticle($matches[1]); // REGEX
       break;
       default : throw new Exception("La page n'existe pas, "."<a href='home'>retournez à l'accueil</a>");

@@ -48,6 +48,22 @@
             Toolbox::ajouterMessageAlerte("La déconnection du profile est établie avec succès, à bientot :)", Toolbox::COULEUR_VERTE);
             header("Location:".URL."home");
         }
+        public function validation_creataccount($username,$login,$password){
+            if($this->userManager->isLoginAvalable($login)){
+                $passwordCrypted = password_hash($password,PASSWORD_DEFAULT);
+                $key = rand(0,9999);
+                if($this->userManager->bdCreatAccount($username,$login,$passwordCrypted,$key)){
+                    Toolbox::ajouterMessageAlerte("Le compte a été créé, un mail de validation vous as été envoyé.)", Toolbox::COULEUR_VERTE);
+                    header("Location:".URL."login");
+                }else{
+                    Toolbox::ajouterMessageAlerte("La création de compte a échoué, veillez recommencer.)", Toolbox::COULEUR_ROUGE);
+                    header("Location:".URL."creataccount");
+                }
+            }else{
+                Toolbox::ajouterMessageAlerte("Le login est déjà utilisé ! ", Toolbox::COULEUR_ROUGE);
+                header("Location:".URL.'creataccount');
+            }
+        }
         public function pageErreur($msg){
             parent::pageErreur($msg); // on fait hériter l'objet pageErreur en passant la variable $msg pour y avoir accès sur toutes les pâges des visiteurs
         }
