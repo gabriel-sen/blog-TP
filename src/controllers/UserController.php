@@ -19,7 +19,7 @@
                 ];
                 header("Location:".URL.'compte/profil'); // Rootage vers le sous répertoire compte comptenant le profile de l'utilisateur connécté.
                 } else {
-                    Toolbox::ajouterMessageAlerte("Le compte ".$login." n'a pas été activé, verifiez vos emails", Toolbox::COULEUR_ROUGE);
+                    Toolbox::ajouterMessageAlerte("Le compte ".$login." n'a pas été activé, verifiez vos emails "."<a href='resendMail/$login'>cliquez ici</a>", Toolbox::COULEUR_ROUGE);
                     header("Location:".URL."login");
                 }
             } else{
@@ -53,6 +53,7 @@
                 $passwordCrypted = password_hash($password,PASSWORD_DEFAULT);
                 $key = rand(0,9999);
                 if($this->userManager->bdCreatAccount($username,$login,$passwordCrypted,$key)){
+                    $this->sendMailValidation($username,$login,$passwordCrypted,$key);
                     Toolbox::ajouterMessageAlerte("Le compte a été créé, un mail de validation vous as été envoyé.)", Toolbox::COULEUR_VERTE);
                     header("Location:".URL."login");
                 }else{
@@ -64,6 +65,22 @@
                 header("Location:".URL.'creataccount');
             }
         }
+
+        private function sendMailValidation($username,$login,$key){
+            $urlVerification = URL."validationMail/".$login."/".$key;
+            $subject = "Creation du compte sur le blog de Gabriel";
+            $message = "Pour valider votre compte, veuillez cliquer sur le lien suivant :".$urlVerification;
+            Toolbox::sendMail($login,$subject,$message);
+        }
+
+        public function resendMail($login){
+            $user = $this->userManager->getUserInformation($login);
+            $this->sendMailValidation($login,$user['email'],$user['clef']);
+            //die(var_dump($this));
+            header("Location:".URL.'login');
+
+        }
+
         public function pageErreur($msg){
             parent::pageErreur($msg); // on fait hériter l'objet pageErreur en passant la variable $msg pour y avoir accès sur toutes les pâges des visiteurs
         }

@@ -10,4 +10,13 @@ class Toolbox {
             "type" => $type
         ];
     }
+
+    public static function sendMail($to, $subject, $message){
+        $header = "From: salut.gaby@gmail.com";
+        if(mail($to, $subject, $message,$header)){
+            self::ajouterMessageAlerte("Mail envoyé", self::COULEUR_VERTE);
+        } else{
+            self::ajouterMessageAlerte("Mail non envoyé", self::COULEUR_ROUGE);
+        }
+    }
 }

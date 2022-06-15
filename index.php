@@ -87,6 +87,10 @@ try {
             header("Location:".URL.'creataccount');
         }
       break;
+      case "validationMail" : echo "test";
+      break;
+      case "resendMail" : $userController->resendMail($url[1]);
+      break;
       case 1 === preg_match('#articleContent\/([\d]+)#', $_GET['page'], $matches) : $articleController->afficherArticle($matches[1]); // REGEX
       break;
       default : throw new Exception("La page n'existe pas, "."<a href='home'>retournez à l'accueil</a>");
