@@ -19,7 +19,7 @@
                 ];
                 header("Location:".URL.'compte/profil'); // Rootage vers le sous répertoire compte comptenant le profile de l'utilisateur connécté.
                 } else {
-                    Toolbox::ajouterMessageAlerte("Le compte ".$login." n'a pas été activé, verifiez vos emails "."<a href='resendMail/$login'>cliquez ici</a>", Toolbox::COULEUR_ROUGE);
+                    Toolbox::ajouterMessageAlerte("Le compte ".$login." n'a pas été activé, verifiez vos emails "."<a href='resendMail/$login'>Renvoyez le lien par mail</a>", Toolbox::COULEUR_ROUGE);
                     header("Location:".URL."login");
                 }
             } else{
@@ -79,6 +79,36 @@
             //die(var_dump($this));
             header("Location:".URL.'login');
 
+        }
+
+        public function Validation_mailAccount($login,$key){
+            if($this->userManager->dbValidationMailAccount($login,$key)){
+                Toolbox::ajouterMessageAlerte("Le compte à été activé.", Toolbox::COULEUR_VERTE);
+                header("Location:".URL."compte/profil");
+            } else{
+                Toolbox::ajouterMessageAlerte("Le compte n'as pas été activé.", Toolbox::COULEUR_ROUGE);
+                header("Location:".URL.'login');
+            }
+        }
+
+        public function validate_username_modification($username){
+            if($this->userManager->bdModificationUsername($_SESSION["profil"]["login"],$username)){
+                Toolbox::ajouterMessageAlerte("username modifié avec succès.", Toolbox::COULEUR_VERTE);
+            } else{
+                Toolbox::ajouterMessageAlerte("modification du username échoué.", Toolbox::COULEUR_ROUGE);
+            }
+            header("Location:".URL."compte/profil");
+        }
+
+        public function changePassword(){
+            $data_page = [
+                "bodyClass" => "changePassword",
+                "page_description" => "Page de modification de Password",
+                "titre" => "Modification du mot de passe de ".$_SESSION['profil']['username'],
+                "view" => "src/views/changePassword.view.php",
+                "template" => "src/views/template.view.php",
+            ];
+            $this->genererPage($data_page);
         }
 
         public function pageErreur($msg){

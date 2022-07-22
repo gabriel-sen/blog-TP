@@ -43,7 +43,6 @@ class UserManager extends MainManager{
         $statment->execute(); 
         $result = $statment->fetch(PDO::FETCH_ASSOC); 
         $statment->closeCursor(); 
-        
         return $result;
         //die(var_dump($result));
     }
@@ -67,4 +66,26 @@ class UserManager extends MainManager{
         return empty($user);
     }
 
+    public function dbValidationMailAccount($login,$key){
+        $req = "UPDATE user set is_valid = 1 WHERE email = :email and clef = :clef";
+        $statment = $this->getBdd()->prepare($req);
+        $statment->bindValue(":email",$login,PDO::PARAM_STR);
+        $statment->bindValue(":clef",$key,PDO::PARAM_INT);
+        $statment->execute();
+        $isChanged = ($statment->rowCount() > 0);
+        //die(var_dump($isChanged));
+        $statment->closeCursor();
+        return $isChanged;
+    }
+
+    public function bdModificationUsername($login, $username){
+        $req = "UPDATE user set username = :username WHERE email = :email ";
+        $statment = $this->getBdd()->prepare($req);
+        $statment->bindValue(":email",$login,PDO::PARAM_STR);
+        $statment->bindValue(":username",$username,PDO::PARAM_STR);
+        $statment->execute();
+        $isChanged = ($statment->rowCount() > 0);
+        $statment->closeCursor();
+        return $isChanged;
+    }
 }

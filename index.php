@@ -50,6 +50,10 @@ try {
                 break;
                 case "logout": $userController->logout();
                 break;
+                case "validate_username_modification" : $userController-> validate_username_modification(Security::secureHTML($_POST['username']));
+                break;
+                case "changePassword" : $userController-> changePassword();
+                break;
                 default : throw new Exception("La page n'existe pas, "."<a href='../home'>retournez à l'accueil</a>");
             }
         }
@@ -87,7 +91,7 @@ try {
             header("Location:".URL.'creataccount');
         }
       break;
-      case "validationMail" : echo "test";
+      case "validationMail" : $userController->Validation_mailAccount($url[1],$url[2]);
       break;
       case "resendMail" : $userController->resendMail($url[1]);
       break;

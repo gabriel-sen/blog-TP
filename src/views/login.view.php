@@ -1,4 +1,4 @@
-<form method="POST" action="validation_login">
+<form method="POST" action="<?= URL ?>validation_login">
 
   <div class="mb-10">
       <label for="email" class="form-label">Email address</label>
