@@ -1,5 +1,3 @@
-<?php ob_start() ?>
-  
 <!-- 
 une photo et/ou un logo ;
 
@@ -14,7 +12,6 @@ et l’ensemble des liens vers les réseaux sociaux où l’on peut vous suivre 
     <img src="" alt="">
     <h2>Blog de Gabriel SEN</h2>
     <p>Le développeur qu'il vous faut</p>
-
     <form>
         <legend class="mb-4">Exemple de formulaire Bootstrap</legend>
         
@@ -41,10 +38,3 @@ et l’ensemble des liens vers les réseaux sociaux où l’on peut vous suivre 
       et l’ensemble des liens vers les réseaux sociaux où l’on peut vous suivre (GitHub, LinkedIn, Twitter…).
     </p>
   </div>
-
-<?php
-  $bodyClass = "home";
-  $titre="Blog de Gabriel SEN";
-  $content = ob_get_clean();
-  require "template.view.php";
-?>

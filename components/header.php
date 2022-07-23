@@ -6,14 +6,26 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/blog-TP/home">Accueil</a>
+                <a class="nav-link" href="<?= URL; ?>home">Accueil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/blog-TP/articles">Articles</a>
+                <a class="nav-link" href="<?= URL; ?>articles">Articles</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/blog-TP/login">Administrateur</a>
-            </li>
+            <?php if(empty($_SESSION['profil'])) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= URL; ?>login">Se Connecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= URL; ?>creataccount">Créer un compte</a>
+                </li>
+            <?php else : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= URL; ?>compte/profil">Mon profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= URL; ?>compte/logout">Se déconnecter</a>
+                </li>
+            <?php endif ; ?>
         </ul>
     </div>
     </nav>

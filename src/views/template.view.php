@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../css/fa/all.min.css ">
   <script src="https://kit.fontawesome.com/8298e03d11.js" crossorigin="anonymous"></script>
   
+  <meta name="description" content="<?= $page_description; ?>">
   <title> <?= $titre ?> </title>
 </head>
 <body class="<?=$bodyClass?>">
@@ -21,8 +22,18 @@
 
 <div class="container w-70 mx-auto">
   <div class="row">
-      <h1> <?= $titre ?> </h1>
-      <?= $content ?> 
+    <?php 
+        if(!empty($_SESSION['alert'])) {
+            foreach($_SESSION['alert'] as $alert){
+                echo "<div class='alert ". $alert['type'] ."' role='alert'>
+                    ".$alert['message']."
+                </div>";
+            }
+            unset($_SESSION['alert']);
+        }
+    ?>
+    <h1> <?= $titre ?> </h1>
+    <?= $content ?> 
   </div>
 </div>
   
