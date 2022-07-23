@@ -48,12 +48,13 @@
             Toolbox::ajouterMessageAlerte("La déconnection du profile est établie avec succès, à bientot :)", Toolbox::COULEUR_VERTE);
             header("Location:".URL."home");
         }
+
         public function validation_creataccount($username,$login,$password){
             if($this->userManager->isLoginAvalable($login)){
                 $passwordCrypted = password_hash($password,PASSWORD_DEFAULT);
                 $key = rand(0,9999);
-                if($this->userManager->bdCreatAccount($username,$login,$passwordCrypted,$key)){
-                    $this->sendMailValidation($username,$login,$passwordCrypted,$key);
+                if($this->userManager->bdCreatAccount($username,$login,$key,$passwordCrypted)){
+                    $this->sendMailValidation($username,$login,$key,$passwordCrypted);
                     Toolbox::ajouterMessageAlerte("Le compte a été créé, un mail de validation vous as été envoyé.)", Toolbox::COULEUR_VERTE);
                     header("Location:".URL."login");
                 }else{
@@ -66,7 +67,7 @@
             }
         }
 
-        private function sendMailValidation($username,$login,$key){
+        private function sendMailValidation($username,$login,$key,$passwordCrypted){
             $urlVerification = URL."validationMail/".$login."/".$key;
             $subject = "Creation du compte sur le blog de Gabriel";
             $message = "Pour valider votre compte, veuillez cliquer sur le lien suivant :".$urlVerification;
@@ -109,6 +110,37 @@
                 "template" => "src/views/template.view.php",
             ];
             $this->genererPage($data_page);
+        }
+
+        public function validation_modificationPassword(){
+            $oldPassword = Security::secureHTML($_POST['oldPassword']) ;
+            $newPassword = Security::secureHTML($_POST['newPassword']) ;
+            $newPasswordConfirmation = Security::secureHTML($_POST['newPasswordConfirmation']) ;
+
+            if(!empty($oldPassword && $newPassword && $newPasswordConfirmation)){
+                if($newPassword === $newPasswordConfirmation){
+                    if($this->userManager->isCombinValid($_SESSION['profil']['login'],$oldPassword)){ // On verifie que le mot de passe de l'ancien MDP du login est bien présent en BD
+                        $newPasswordEncryption = password_hash($newPassword, PASSWORD_DEFAULT);
+                        if($this->userManager->bdChangePassword($_SESSION['profil']['login'],$newPasswordEncryption)){
+                            Toolbox::ajouterMessageAlerte("Modification avec succès.", Toolbox::COULEUR_VERTE);
+                            header("Location:".URL."compte/changePassword");
+                        } else{
+                            Toolbox::ajouterMessageAlerte("La modification à échoué pour une raison inconnue, contactez l'adm:inistrateur : admin-blog-TP@gmail.com.", Toolbox::COULEUR_ROUGE);
+                            header("Location:".URL."compte/changePassword");
+                        }
+
+                    } else{
+                        Toolbox::ajouterMessageAlerte("Le mot de passe renseigné en champs ancien mot de passe ne correspond pas au mot de passe du compte. Veuillez re-essayer d'entrer votre mot de passe actuel", Toolbox::COULEUR_ROUGE);
+                        header("Location:".URL."compte/changePassword");
+                    }
+                }else{
+                    Toolbox::ajouterMessageAlerte("les password ne correspondent pas.", Toolbox::COULEUR_ROUGE);
+                    header("Location:".URL."compte/changePassword");
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte("Vous n'avez pas renseigné toutes les informations.", Toolbox::COULEUR_ROUGE);
+                header("Location:".URL."compte/changePassword");
+            }
         }
 
         public function pageErreur($msg){

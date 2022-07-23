@@ -7,7 +7,7 @@
     </div>
     <div class="mb-12">
       <label for="newPassword" class="form-label">Nouveau Password</label>
-      <input type="password" class="form-control" id="newPassword" name="newPasswordConfirmation" required>
+      <input type="password" class="form-control" id="newPassword" name="newPassword" required>
     </div>
     <div class="mb-12">
       <label for="newPasswordConfirmation" class="form-label">Confirmez votre nouveau Password</label>
