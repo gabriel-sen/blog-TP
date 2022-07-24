@@ -67,7 +67,7 @@
             }
         }
 
-        private function sendMailValidation($username,$login,$key,$passwordCrypted){
+        private function sendMailValidation($username,$login,$key){
             $urlVerification = URL."validationMail/".$login."/".$key;
             $subject = "Creation du compte sur le blog de Gabriel";
             $message = "Pour valider votre compte, veuillez cliquer sur le lien suivant :".$urlVerification;
@@ -157,3 +157,4 @@
             parent::pageErreur($msg); // on fait hériter l'objet pageErreur en passant la variable $msg pour y avoir accès sur toutes les pâges des visiteurs
         }
     }
+?>
