@@ -50,13 +50,16 @@ try {
                 break;
                 case "logout": $userController->logout();
                 break;
-                case "validate_username_modification" : $userController-> validate_username_modification(Security::secureHTML($_POST['username']));
+                case "validate_username_modification" : $userController-> validateUsernameModification(Security::secureHTML($_POST['username']));
                 break;
                 case "changePassword" : $userController-> changePassword();
                 break;
                 case "validation_modificationPassword" : $userController-> validation_modificationPassword();
                 break;
-                
+                case "deletAccount" : $userController-> deletAccount();
+                break;
+                case "validationChangeProfileImage" : $userController-> changeImage($_FILES['img']);
+                break;
                 default : throw new Exception("La page n'existe pas, "."<a href='../home'>retournez à l'accueil</a>");
             }
         }

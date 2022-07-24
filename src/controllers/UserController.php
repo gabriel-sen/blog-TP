@@ -53,7 +53,7 @@
             if($this->userManager->isLoginAvalable($login)){
                 $passwordCrypted = password_hash($password,PASSWORD_DEFAULT);
                 $key = rand(0,9999);
-                if($this->userManager->bdCreatAccount($username,$login,$key,$passwordCrypted)){
+                if($this->userManager->bdCreatAccount($username,$login,$key,$passwordCrypted,"profils/profil.jpg")){ // image de profile de base pour tout les utilisateurs
                     $this->sendMailValidation($username,$login,$key,$passwordCrypted);
                     Toolbox::ajouterMessageAlerte("Le compte a été créé, un mail de validation vous as été envoyé.)", Toolbox::COULEUR_VERTE);
                     header("Location:".URL."login");
@@ -67,7 +67,7 @@
             }
         }
 
-        private function sendMailValidation($username,$login,$key,$passwordCrypted){
+        private function sendMailValidation($username,$login,$key){
             $urlVerification = URL."validationMail/".$login."/".$key;
             $subject = "Creation du compte sur le blog de Gabriel";
             $message = "Pour valider votre compte, veuillez cliquer sur le lien suivant :".$urlVerification;
@@ -81,7 +81,7 @@
             header("Location:".URL.'login');
 
         }
-
+        // ACTIVATION DU COMPTE
         public function Validation_mailAccount($login,$key){
             if($this->userManager->dbValidationMailAccount($login,$key)){
                 Toolbox::ajouterMessageAlerte("Le compte à été activé.", Toolbox::COULEUR_VERTE);
@@ -91,8 +91,9 @@
                 header("Location:".URL.'login');
             }
         }
-
-        public function validate_username_modification($username){
+//TODO : montrer dès cette partie
+        // MODIFICATION username
+        public function validateUsernameModification($username){
             if($this->userManager->bdModificationUsername($_SESSION["profil"]["login"],$username)){
                 Toolbox::ajouterMessageAlerte("username modifié avec succès.", Toolbox::COULEUR_VERTE);
             } else{
@@ -100,7 +101,7 @@
             }
             header("Location:".URL."compte/profil");
         }
-
+        // MODIFICATION DE PASSWORD
         public function changePassword(){
             $data_page = [
                 "bodyClass" => "changePassword",
@@ -111,7 +112,7 @@
             ];
             $this->genererPage($data_page);
         }
-
+        // VALIDATION MODIFICATION DE PASSWORD
         public function validation_modificationPassword(){
             $oldPassword = Security::secureHTML($_POST['oldPassword']) ;
             $newPassword = Security::secureHTML($_POST['newPassword']) ;
@@ -142,8 +143,51 @@
                 header("Location:".URL."compte/changePassword");
             }
         }
-
+        // SUPRESSION DE COMPTE
+        public function deletAccount(){
+            $this->fileUserImgDelet($_SESSION['profil']['login']);
+            rmdir("./public/Assets/images/profils/".$_SESSION['profil']['login']);
+            if($this->userManager->dbDeletAccount($_SESSION['profil']['login'])){
+                Toolbox::ajouterMessageAlerte("suppression du compte éfféctuée avec succès.", Toolbox::COULEUR_VERTE);
+                $this->logout();
+            } else{
+                Toolbox::ajouterMessageAlerte("La suppression à échoué pour une raison inconnue, contactez l'adm:inistrateur : admin-blog-TP@gmail.com.", Toolbox::COULEUR_ROUGE);
+                header("Location:".URL."compte/profil");
+            }
+        }
+        public function changeImage($file){
+            
+            try{
+                $repository = "./public/Assets/images/profils/".$_SESSION['profil']['login']."/";
+                if($_FILES['img']['size'] > 0){
+                    // ajout de l'image dans le repertoir
+                    $nameImage = Toolbox::addImage($file,$repository);
+                    // on supprime l'image précédante si different de profile.jpg
+                    $this->fileUserImgDelet($_SESSION['profil']['login']);
+                    // on ajoute la nouvel image dans la BD
+                    $nameImageforBd = "profils/".$_SESSION['profil']['login']."/".$nameImage; // URL de l'image stocké en BD
+                    //var_dump($nameImageforBd);
+                    if($this->userManager->dbAddImg($_SESSION['profil']['login'],$nameImageforBd)){
+                        Toolbox::ajouterMessageAlerte("Image correctement ajouté en Base de donnée.", Toolbox::COULEUR_VERTE);
+                        header("Location:".URL."compte/profil");
+                    } else {
+                        Toolbox::ajouterMessageAlerte("L'ajout de l'image en Base de données à échoué.", Toolbox::COULEUR_ROUGE);
+                    }
+                } else {
+                    Toolbox::ajouterMessageAlerte("Vous n'avez pas modifié l'image.", Toolbox::COULEUR_ROUGE);
+                }
+            }catch(Exception $exeption){
+                Toolbox::ajouterMessageAlerte($exeption->getMessage(),Toolbox::COULEUR_ROUGE);
+            }
+        }
+        private function fileUserImgDelet(){
+            $oldImageName = $this->userManager->getImageUser($_SESSION['profil']['login']);
+            if($oldImageName !== "profils/profil.jpg"){ 
+                unlink("public/Assets/images/".$oldImageName);
+            }
+        }
         public function pageErreur($msg){
             parent::pageErreur($msg); // on fait hériter l'objet pageErreur en passant la variable $msg pour y avoir accès sur toutes les pâges des visiteurs
         }
     }
+?>

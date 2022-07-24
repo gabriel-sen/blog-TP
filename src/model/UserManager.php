@@ -46,15 +46,16 @@ class UserManager extends MainManager{
         return $result;
         //die(var_dump($result));
     }
-
-    public function bdCreatAccount($username,$login,$key,$passwordCrypted){
+    // REQUETTE CREATION DE COMPTE
+    public function bdCreatAccount($username,$login,$key,$passwordCrypted,$img){
         $req = "INSERT INTO user (username, email, password, img, role, is_valid, clef) 
-                VALUES (:username, :email, :password, '','user', 0, :clef)";
+                VALUES (:username, :email, :password, :img,'user', 0, :clef)";
         $statment = $this->getBdd()->prepare($req);
         $statment->bindValue(":username",$username,PDO::PARAM_STR);
         $statment->bindValue(":email",$login,PDO::PARAM_STR);
         $statment->bindValue(":clef",$key,PDO::PARAM_INT);
         $statment->bindValue(":password",$passwordCrypted,PDO::PARAM_STR);
+        $statment->bindValue(":img",$img,PDO::PARAM_STR);
         $statment->execute();
         $isChanged = ($statment->rowCount() > 0);
         $statment->closeCursor();
@@ -98,5 +99,33 @@ class UserManager extends MainManager{
         $isChanged = ($statment->rowCount() > 0);
         $statment->closeCursor();
         return $isChanged;
+    }
+    public function dbDeletAccount($login){
+        $req="DELETE FROM user WHERE email = :email";
+        $statment = $this->getBdd()->prepare($req);
+        $statment->bindValue(":email",$login,PDO::PARAM_STR);
+        $statment->execute();
+        $isChanged = ($statment->rowCount() > 0);
+        $statment->closeCursor();
+        return $isChanged;
+    }
+    public function dbAddImg($login, $img){
+        $req = "UPDATE user set img = :img WHERE email = :email ";
+        $statment = $this->getBdd()->prepare($req);
+        $statment->bindValue(":email",$login,PDO::PARAM_STR);
+        $statment->bindValue(":img",$img,PDO::PARAM_STR);
+        $statment->execute();
+        $isChanged = ($statment->rowCount() > 0);
+        $statment->closeCursor();
+        return $isChanged;
+    }
+    public function getImageUser($login){
+        $req = "SELECT img FROM user WHERE email = :email"; 
+        $statment = $this->getBdd()->prepare($req);  
+        $statment->bindValue(":email",$login,PDO::PARAM_STR); 
+        $statment->execute(); 
+        $result = $statment->fetch(PDO::FETCH_ASSOC); 
+        $statment->closeCursor(); 
+        return $result['img'];
     }
 }
