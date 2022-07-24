@@ -10,12 +10,11 @@
       }
     */?>
 
-    <form Method="POST" action="<?= URL ?>compte/validationChangeProfileImage" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="changeImg">Changer l'image de profile :</label>
-            <input type="file" class="form-control-file" id="changeImg" onchange="submit();">
-        </div>
+    <form method="POST" action="<?= URL ?>compte/validationChangeProfileImage" enctype="multipart/form-data">
+      <label for="changeImg">Changer l'image de profile :</label> <br>
+      <input name="img" type="file" class="form-control-file" id="changeImg" onchange="submit();"/>
     </form>
+
 </section >
 <section  id="name">
     <form method="POST" action="<?= URL; ?>compte/validate_username_modification">

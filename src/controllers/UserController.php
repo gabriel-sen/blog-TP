@@ -153,6 +153,24 @@
                 header("Location:".URL."compte/profil");
             }
         }
+        public function changeImage($file){
+            $repository = "./public/Assets/images/profils/".$_SESSION['profil']['login']."/";
+            if($_FILES['img']['size'] > 0){
+                $nameImage = Toolbox::addImage($file,$repository); // on récupère le nom de l'image
+                $nameImageforBd = "profils/".$_SESSION['profil']['login']."/".$nameImage;
+                //var_dump($nameImageforBd);
+                if($this->userManager->dbAddImg($_SESSION['profil']['login'],$nameImageforBd)){
+                    Toolbox::ajouterMessageAlerte("Image correctement ajouté en Base de donnée.", Toolbox::COULEUR_VERTE);
+                    header("Location:".URL."compte/profil");
+                } else {
+                    Toolbox::ajouterMessageAlerte("L'ajout de l'image en Base de données à échoué.", Toolbox::COULEUR_ROUGE);
+                    header("Location:".URL."compte/profil");
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte("Vous n'avez pas modifié l'image.", Toolbox::COULEUR_ROUGE);
+                header("Location:".URL."compte/profil");
+            }
+        }
         public function pageErreur($msg){
             parent::pageErreur($msg); // on fait hériter l'objet pageErreur en passant la variable $msg pour y avoir accès sur toutes les pâges des visiteurs
         }

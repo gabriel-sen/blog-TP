@@ -58,6 +58,8 @@ try {
                 break;
                 case "deletAccount" : $userController-> deletAccount();
                 break;
+                case "validationChangeProfileImage" : $userController-> changeImage($_FILES['img']);
+                break;
                 default : throw new Exception("La page n'existe pas, "."<a href='../home'>retournez à l'accueil</a>");
             }
         }

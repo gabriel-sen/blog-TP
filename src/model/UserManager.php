@@ -109,4 +109,14 @@ class UserManager extends MainManager{
         $statment->closeCursor();
         return $isChanged;
     }
+    public function dbAddImg($login, $img){
+        $req = "UPDATE user set img = :img WHERE email = :email ";
+        $statment = $this->getBdd()->prepare($req);
+        $statment->bindValue(":email",$login,PDO::PARAM_STR);
+        $statment->bindValue(":img",$img,PDO::PARAM_STR);
+        $statment->execute();
+        $isChanged = ($statment->rowCount() > 0);
+        $statment->closeCursor();
+        return $isChanged;
+    }
 }
