@@ -8,7 +8,13 @@
   ?>
     <div class="card_articles col-md-4 container_articles">
       <div class="card">
-        <img class="card-img-top" src="<?=$articles[$i]->getImage()?>" alt="Card image cap">
+        <?php
+          if(empty($articles[$i]->getImage())){
+            echo '<img src="'.$imgBase.'"class="card-img-top" alt="...">';
+          }else {
+            echo '<img src="'.$articles[$i]->getImage().'" class="card-img-top" alt="...">';
+          }
+        ?>
         <div class="card-body">
           <h5 class="card-title"><?=$articles[$i]->getTitle()?></h5>
           <p class="card-text"><?=$articles[$i]->getTexte()?></p>

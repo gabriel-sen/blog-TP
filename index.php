@@ -50,7 +50,7 @@ try {
                 break;
                 case "logout": $userController->logout();
                 break;
-                case "validate_username_modification" : $userController-> validate_username_modification(Security::secureHTML($_POST['username']));
+                case "validate_username_modification" : $userController-> validateUsernameModification(Security::secureHTML($_POST['username']));
                 break;
                 case "changePassword" : $userController-> changePassword();
                 break;

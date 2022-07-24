@@ -9,6 +9,7 @@ class ArticlesController extends MainController{
         $data_page = [
             "bodyClass" => "articles",
             "page_description" => "Description de la page d'accueil",
+            "imgBase" => "./public/assets/images/article/articleBase.png",
             "titre" => "Tout les articles :",
             "view" => "src/views/articles.view.php",
             "template" => "src/views/template.view.php",

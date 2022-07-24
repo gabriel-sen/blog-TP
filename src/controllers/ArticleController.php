@@ -8,6 +8,7 @@ class ArticleController extends MainController{
         $article = $this->articleManager->getArticle($id); // 5) Je récupère tout mes articles que je stock dans ma variable .
         $data_page = [
             "bodyClass" => "articles",
+            "imgBase" => "../public/assets/images/article/articleBase.png",
             "page_description" => "ceci est un article du blog de gabriel sen",
             "view" => "src/views/articleView.php",
             "template" => "src/views/template.view.php",

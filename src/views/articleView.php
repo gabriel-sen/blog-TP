@@ -10,7 +10,13 @@
   ?>
   <section class="article">
     <div class="image-article-container">
-        <img src="<?=$article->getImage()?>" class="image-article" alt="...">
+    <?php
+      if(empty($article->getImage())){
+        echo '<img src="'.$imgBase.'"class="image-article" alt="...">';
+      }else {
+        echo '<img src="'.$article->getImage().'" class="image-article" alt="...">';
+      }
+    ?>
     </div>
     <div class="container_articles">
       <h2 class="title-article"><?=$article->getSubTitle()?></h2>

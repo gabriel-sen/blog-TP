@@ -53,7 +53,7 @@
             if($this->userManager->isLoginAvalable($login)){
                 $passwordCrypted = password_hash($password,PASSWORD_DEFAULT);
                 $key = rand(0,9999);
-                if($this->userManager->bdCreatAccount($username,$login,$key,$passwordCrypted)){
+                if($this->userManager->bdCreatAccount($username,$login,$key,$passwordCrypted,"profils/profil.jpg")){ // image de profile de base pour tout les utilisateurs
                     $this->sendMailValidation($username,$login,$key,$passwordCrypted);
                     Toolbox::ajouterMessageAlerte("Le compte a été créé, un mail de validation vous as été envoyé.)", Toolbox::COULEUR_VERTE);
                     header("Location:".URL."login");
@@ -92,7 +92,8 @@
             }
         }
 //TODO : montrer dès cette partie
-        public function validate_username_modification($username){
+        // MODIFICATION username
+        public function validateUsernameModification($username){
             if($this->userManager->bdModificationUsername($_SESSION["profil"]["login"],$username)){
                 Toolbox::ajouterMessageAlerte("username modifié avec succès.", Toolbox::COULEUR_VERTE);
             } else{
