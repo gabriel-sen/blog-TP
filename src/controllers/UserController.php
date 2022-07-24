@@ -145,6 +145,8 @@
         }
         // SUPRESSION DE COMPTE
         public function deletAccount(){
+            $this->fileUserImgDelet($_SESSION['profil']['login']);
+            rmdir("./public/Assets/images/profils/".$_SESSION['profil']['login']);
             if($this->userManager->dbDeletAccount($_SESSION['profil']['login'])){
                 Toolbox::ajouterMessageAlerte("suppression du compte éfféctuée avec succès.", Toolbox::COULEUR_VERTE);
                 $this->logout();
@@ -158,11 +160,11 @@
             try{
                 $repository = "./public/Assets/images/profils/".$_SESSION['profil']['login']."/";
                 if($_FILES['img']['size'] > 0){
-                    $nameImage = Toolbox::addImage($file,$repository); // on récupère le nom de l'image
-                    $oldImageName = $this->userManager->getImageUser($_SESSION['profil']['login']);
-                    if($oldImageName !== "profils/profil.jpg"){ // on supprime l'image précédante si different de profile.jpg
-                        unlink("public/Assets/images/".$oldImageName);
-                    }
+                    // ajout de l'image dans le repertoir
+                    $nameImage = Toolbox::addImage($file,$repository);
+                    // on supprime l'image précédante si different de profile.jpg
+                    $this->fileUserImgDelet($_SESSION['profil']['login']);
+                    // on ajoute la nouvel image dans la BD
                     $nameImageforBd = "profils/".$_SESSION['profil']['login']."/".$nameImage; // URL de l'image stocké en BD
                     //var_dump($nameImageforBd);
                     if($this->userManager->dbAddImg($_SESSION['profil']['login'],$nameImageforBd)){
@@ -170,14 +172,18 @@
                         header("Location:".URL."compte/profil");
                     } else {
                         Toolbox::ajouterMessageAlerte("L'ajout de l'image en Base de données à échoué.", Toolbox::COULEUR_ROUGE);
-                        header("Location:".URL."compte/profil");
                     }
                 } else {
                     Toolbox::ajouterMessageAlerte("Vous n'avez pas modifié l'image.", Toolbox::COULEUR_ROUGE);
-                    header("Location:".URL."compte/profil");
                 }
             }catch(Exception $exeption){
                 Toolbox::ajouterMessageAlerte($exeption->getMessage(),Toolbox::COULEUR_ROUGE);
+            }
+        }
+        private function fileUserImgDelet(){
+            $oldImageName = $this->userManager->getImageUser($_SESSION['profil']['login']);
+            if($oldImageName !== "profils/profil.jpg"){ 
+                unlink("public/Assets/images/".$oldImageName);
             }
         }
         public function pageErreur($msg){
