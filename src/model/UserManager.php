@@ -119,4 +119,13 @@ class UserManager extends MainManager{
         $statment->closeCursor();
         return $isChanged;
     }
+    public function getImageUser($login){
+        $req = "SELECT img FROM user WHERE email = :email"; 
+        $statment = $this->getBdd()->prepare($req);  
+        $statment->bindValue(":email",$login,PDO::PARAM_STR); 
+        $statment->execute(); 
+        $result = $statment->fetch(PDO::FETCH_ASSOC); 
+        $statment->closeCursor(); 
+        return $result['img'];
+    }
 }

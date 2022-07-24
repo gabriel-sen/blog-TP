@@ -154,21 +154,30 @@
             }
         }
         public function changeImage($file){
-            $repository = "./public/Assets/images/profils/".$_SESSION['profil']['login']."/";
-            if($_FILES['img']['size'] > 0){
-                $nameImage = Toolbox::addImage($file,$repository); // on récupère le nom de l'image
-                $nameImageforBd = "profils/".$_SESSION['profil']['login']."/".$nameImage;
-                //var_dump($nameImageforBd);
-                if($this->userManager->dbAddImg($_SESSION['profil']['login'],$nameImageforBd)){
-                    Toolbox::ajouterMessageAlerte("Image correctement ajouté en Base de donnée.", Toolbox::COULEUR_VERTE);
-                    header("Location:".URL."compte/profil");
+            
+            try{
+                $repository = "./public/Assets/images/profils/".$_SESSION['profil']['login']."/";
+                if($_FILES['img']['size'] > 0){
+                    $nameImage = Toolbox::addImage($file,$repository); // on récupère le nom de l'image
+                    $oldImageName = $this->userManager->getImageUser($_SESSION['profil']['login']);
+                    if($oldImageName !== "profils/profil.jpg"){ // on supprime l'image précédante si different de profile.jpg
+                        unlink("public/Assets/images/".$oldImageName);
+                    }
+                    $nameImageforBd = "profils/".$_SESSION['profil']['login']."/".$nameImage; // URL de l'image stocké en BD
+                    //var_dump($nameImageforBd);
+                    if($this->userManager->dbAddImg($_SESSION['profil']['login'],$nameImageforBd)){
+                        Toolbox::ajouterMessageAlerte("Image correctement ajouté en Base de donnée.", Toolbox::COULEUR_VERTE);
+                        header("Location:".URL."compte/profil");
+                    } else {
+                        Toolbox::ajouterMessageAlerte("L'ajout de l'image en Base de données à échoué.", Toolbox::COULEUR_ROUGE);
+                        header("Location:".URL."compte/profil");
+                    }
                 } else {
-                    Toolbox::ajouterMessageAlerte("L'ajout de l'image en Base de données à échoué.", Toolbox::COULEUR_ROUGE);
+                    Toolbox::ajouterMessageAlerte("Vous n'avez pas modifié l'image.", Toolbox::COULEUR_ROUGE);
                     header("Location:".URL."compte/profil");
                 }
-            } else {
-                Toolbox::ajouterMessageAlerte("Vous n'avez pas modifié l'image.", Toolbox::COULEUR_ROUGE);
-                header("Location:".URL."compte/profil");
+            }catch(Exception $exeption){
+                Toolbox::ajouterMessageAlerte($exeption->getMessage(),Toolbox::COULEUR_ROUGE);
             }
         }
         public function pageErreur($msg){
