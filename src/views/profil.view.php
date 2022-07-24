@@ -1,6 +1,21 @@
 <section  id="img">
     <h4> Votre image de profil : </h4>
-    <img src="<?= $userData['img'] ?>" alt="">
+    <img src="../public/assets/images/<?= $userData['img']?>"class="image-profil" alt="Image du profile">
+
+    <?php /*
+      if(empty($article->getImage())){
+        echo '<img src="'.$imgBase.'"class="image-article" alt="...">';
+      }else {
+        echo '<img src="'.$article->getImage().'" class="image-article" alt="...">';
+      }
+    */?>
+
+    <form Method="POST" action="<?= URL ?>compte/validationChangeProfileImage" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="changeImg">Changer l'image de profile :</label>
+            <input type="file" class="form-control-file" id="changeImg" onchange="submit();">
+        </div>
+    </form>
 </section >
 <section  id="name">
     <form method="POST" action="<?= URL; ?>compte/validate_username_modification">
