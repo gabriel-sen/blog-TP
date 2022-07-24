@@ -81,7 +81,7 @@
             header("Location:".URL.'login');
 
         }
-
+        // ACTIVATION DU COMPTE
         public function Validation_mailAccount($login,$key){
             if($this->userManager->dbValidationMailAccount($login,$key)){
                 Toolbox::ajouterMessageAlerte("Le compte à été activé.", Toolbox::COULEUR_VERTE);
@@ -91,7 +91,7 @@
                 header("Location:".URL.'login');
             }
         }
-
+//TODO : montrer dès cette partie
         public function validate_username_modification($username){
             if($this->userManager->bdModificationUsername($_SESSION["profil"]["login"],$username)){
                 Toolbox::ajouterMessageAlerte("username modifié avec succès.", Toolbox::COULEUR_VERTE);
@@ -100,7 +100,7 @@
             }
             header("Location:".URL."compte/profil");
         }
-
+        // MODIFICATION DE PASSWORD
         public function changePassword(){
             $data_page = [
                 "bodyClass" => "changePassword",
@@ -111,7 +111,7 @@
             ];
             $this->genererPage($data_page);
         }
-
+        // VALIDATION MODIFICATION DE PASSWORD
         public function validation_modificationPassword(){
             $oldPassword = Security::secureHTML($_POST['oldPassword']) ;
             $newPassword = Security::secureHTML($_POST['newPassword']) ;
@@ -142,7 +142,16 @@
                 header("Location:".URL."compte/changePassword");
             }
         }
-
+        // SUPRESSION DE COMPTE
+        public function deletAccount(){
+            if($this->userManager->dbDeletAccount($_SESSION['profil']['login'])){
+                Toolbox::ajouterMessageAlerte("suppression du compte éfféctuée avec succès.", Toolbox::COULEUR_VERTE);
+                $this->logout();
+            } else{
+                Toolbox::ajouterMessageAlerte("La suppression à échoué pour une raison inconnue, contactez l'adm:inistrateur : admin-blog-TP@gmail.com.", Toolbox::COULEUR_ROUGE);
+                header("Location:".URL."compte/profil");
+            }
+        }
         public function pageErreur($msg){
             parent::pageErreur($msg); // on fait hériter l'objet pageErreur en passant la variable $msg pour y avoir accès sur toutes les pâges des visiteurs
         }

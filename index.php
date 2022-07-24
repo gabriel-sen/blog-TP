@@ -56,7 +56,8 @@ try {
                 break;
                 case "validation_modificationPassword" : $userController-> validation_modificationPassword();
                 break;
-                
+                case "deletAccount" : $userController-> deletAccount();
+                break;
                 default : throw new Exception("La page n'existe pas, "."<a href='../home'>retournez à l'accueil</a>");
             }
         }

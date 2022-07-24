@@ -46,7 +46,7 @@ class UserManager extends MainManager{
         return $result;
         //die(var_dump($result));
     }
-
+    // REQUETTE CREATION DE COMPTE
     public function bdCreatAccount($username,$login,$key,$passwordCrypted){
         $req = "INSERT INTO user (username, email, password, img, role, is_valid, clef) 
                 VALUES (:username, :email, :password, '','user', 0, :clef)";
@@ -94,6 +94,15 @@ class UserManager extends MainManager{
         $statment = $this->getBdd()->prepare($req);
         $statment->bindValue(":email",$login,PDO::PARAM_STR);
         $statment->bindValue(":password",$password,PDO::PARAM_STR);
+        $statment->execute();
+        $isChanged = ($statment->rowCount() > 0);
+        $statment->closeCursor();
+        return $isChanged;
+    }
+    public function dbDeletAccount($login){
+        $req="DELETE FROM user WHERE email = :email";
+        $statment = $this->getBdd()->prepare($req);
+        $statment->bindValue(":email",$login,PDO::PARAM_STR);
         $statment->execute();
         $isChanged = ($statment->rowCount() > 0);
         $statment->closeCursor();
