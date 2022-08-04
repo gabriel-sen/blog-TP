@@ -53,7 +53,7 @@
             if($this->userManager->isLoginAvalable($login)){
                 $passwordCrypted = password_hash($password,PASSWORD_DEFAULT);
                 $key = rand(0,9999);
-                if($this->userManager->bdCreatAccount($username,$login,$key,$passwordCrypted,"profils/profil.jpg")){ // image de profile de base pour tout les utilisateurs
+                if($this->userManager->bdCreatAccount($username,$login,$key,$passwordCrypted,"profils/profil.jpg","user")){ // image de profile de base pour tout les utilisateurs
                     $this->sendMailValidation($username,$login,$key,$passwordCrypted);
                     Toolbox::ajouterMessageAlerte("Le compte a été créé, un mail de validation vous as été envoyé.)", Toolbox::COULEUR_VERTE);
                     header("Location:".URL."login");
@@ -124,7 +124,7 @@
                         $newPasswordEncryption = password_hash($newPassword, PASSWORD_DEFAULT);
                         if($this->userManager->bdChangePassword($_SESSION['profil']['login'],$newPasswordEncryption)){
                             Toolbox::ajouterMessageAlerte("Modification avec succès.", Toolbox::COULEUR_VERTE);
-                            header("Location:".URL."compte/changePassword");
+                            header("Location:".URL."compte/profil");
                         } else{
                             Toolbox::ajouterMessageAlerte("La modification à échoué pour une raison inconnue, contactez l'adm:inistrateur : admin-blog-TP@gmail.com.", Toolbox::COULEUR_ROUGE);
                             header("Location:".URL."compte/changePassword");

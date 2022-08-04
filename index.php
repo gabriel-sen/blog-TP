@@ -108,3 +108,8 @@ try {
 } catch (Exception $e){
   $visitorController->pageErreur($e->getMessage()); // On appel une instance de la fonction pageErreur contenu dans MainController EN PRIVATE
 }
+
+
+
+// TODO : Créer un fichier controller/routerController.php
+// TODO : require_once "src/ controller/routerController.phpp";

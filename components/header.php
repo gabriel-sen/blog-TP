@@ -11,7 +11,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?= URL; ?>articles">Articles</a>
             </li>
-            <?php if(empty($_SESSION['profil'])) : ?>
+            <?php if(!Security::islogged()) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= URL; ?>login">Se Connecter</a>
                 </li>
@@ -27,5 +27,15 @@
                 </li>
             <?php endif ; ?>
         </ul>
+        <?php if(Security::islogged() && Security::isAdmin()) : ?>
+        <div class="dropdown">
+            <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Administration
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="admin/rights">Gérer les droits</a>
+            </div>
+        </div>
+        <?php endif ; ?>
     </div>
     </nav>
