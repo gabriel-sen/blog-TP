@@ -15,6 +15,9 @@ $visitorController = new VisitorController(); // mon controler pilote toute la l
 require_once("src/controllers/UserController.php");
 $userController = new UserController();
 
+require_once("src/controllers/AdminController.php");
+$adminController = new AdminController();
+
 // PARTIE DES ARTICLES ET COMENTAIRES 
 require_once "src/controllers/ArticlesController.php";
 $articlesController = new ArticlesController; // J'instancie mon controller d'article
@@ -44,7 +47,6 @@ try {
             Toolbox::ajouterMessageAlerte("Veuillez vous connécter", Toolbox::COULEUR_ROUGE);
             header("Location:".URL.'login');
         } else{
-
             switch($url[1]){
                 case "profil": $userController->profil();
                 break;
@@ -63,48 +65,65 @@ try {
                 default : throw new Exception("La page n'existe pas, "."<a href='../home'>retournez à l'accueil</a>");
             }
         }
-
-      break;
-      case "home" : $visitorController->accueil();
-      break;
-      case "articles" : $articlesController->afficherArticles(); // J'appel la fonction afficher livre présent dans mon controller d'article
-      break;
-      case "login" : $visitorController->login();
-      break;
-      case "validation_login" : // contrôle sur les informations de routage des données récupérés (je préfère ne pas le faire dans le controller)
-        if(!empty($_POST['login']) && !empty($_POST['password'])){
-            $login = Security::secureHTML($_POST['login']);
-            //die(var_dump($login));
-            $password = Security::secureHTML($_POST['password']);
-            //die(var_dump($password));
-            $userController->validation_login($login,$password);
-            //die(var_dump($userController));
-        } else{
-            Toolbox::ajouterMessageAlerte("login ou mot de passe incorecte ", Toolbox::COULEUR_ROUGE);
-            header("Location:".URL.'login');
-        }
-      break;
-      case "creataccount" : $visitorController->creataccount();
-      break;
-      case "validation_creationaccount" : 
-        if(!empty($_POST['username']) && !empty($_POST['login']) && !empty($_POST['password'])){
-          $username = Security::secureHTML($_POST['username']);
+    break;
+    case "admin" :
+      if(!Security::isAdmin()){
+        Toolbox::ajouterMessageAlerte("Veuillez vous connécter avec un compt administrateur", Toolbox::COULEUR_ROUGE);
+        header("Location:".URL.'login');
+      } elseif(!Security::isAdmin()){
+          Toolbox::ajouterMessageAlerte("Vous n'êtes plus administrateur.", Toolbox::COULEUR_ROUGE);
+          header("Location:".URL.'home');
+      } else {
+          switch($url[1]){
+              case "rights": $adminController ->rights();
+              break;
+              case "validateUpdateRole": $adminController -> validateUpdateRole($_POST['login'],$_POST['role']);
+              break;
+              default : throw new Exception("La page n'existe pas, "."<a href='home'>retournez à l'accueil</a>");
+          }
+      }
+    break;
+    case "home" : $visitorController->accueil();
+    break;
+    case "articles" : $articlesController->afficherArticles(); // J'appel la fonction afficher livre présent dans mon controller d'article
+    break;
+    case "login" : $visitorController->login();
+    break;
+    case "validation_login" : // contrôle sur les informations de routage des données récupérés (je préfère ne pas le faire dans le controller)
+      if(!empty($_POST['login']) && !empty($_POST['password'])){
           $login = Security::secureHTML($_POST['login']);
+          //die(var_dump($login));
           $password = Security::secureHTML($_POST['password']);
-          $userController->validation_creataccount($username,$login,$password);
-        }else{
-            Toolbox::ajouterMessageAlerte("Veuillez remplire tout les champs du formulaire", Toolbox::COULEUR_ROUGE);
-            header("Location:".URL.'creataccount');
-        }
-      break;
-      case "validationMail" : $userController->Validation_mailAccount($url[1],$url[2]);
-      break;
-      case "resendMail" : $userController->resendMail($url[1]);
-      break;
-      case 1 === preg_match('#articleContent\/([\d]+)#', $_GET['page'], $matches) : $articleController->afficherArticle($matches[1]); // REGEX
-      break;
-      default : throw new Exception("La page n'existe pas, "."<a href='home'>retournez à l'accueil</a>");
+          //die(var_dump($password));
+          $userController->validation_login($login,$password);
+          //die(var_dump($userController));
+      } else{
+          Toolbox::ajouterMessageAlerte("login ou mot de passe incorecte ", Toolbox::COULEUR_ROUGE);
+          header("Location:".URL.'login');
+      }
+    break;
+    case "creataccount" : $visitorController->creataccount();
+    break;
+    case "validation_creationaccount" : 
+      if(!empty($_POST['username']) && !empty($_POST['login']) && !empty($_POST['password'])){
+        $username = Security::secureHTML($_POST['username']);
+        $login = Security::secureHTML($_POST['login']);
+        $password = Security::secureHTML($_POST['password']);
+        $userController->validation_creataccount($username,$login,$password);
+      }else{
+          Toolbox::ajouterMessageAlerte("Veuillez remplire tout les champs du formulaire", Toolbox::COULEUR_ROUGE);
+          header("Location:".URL.'creataccount');
+      }
+    break;
+    case "validationMail" : $userController->Validation_mailAccount($url[1],$url[2]);
+    break;
+    case "resendMail" : $userController->resendMail($url[1]);
+    break;
+    case 1 === preg_match('#articleContent\/([\d]+)#', $_GET['page'], $matches) : $articleController->afficherArticle($matches[1]); // REGEX
+    break;
+    default : throw new Exception("La page n'existe pas, "."<a href='home'>retournez à l'accueil</a>");
   }
+
 } catch (Exception $e){
   $visitorController->pageErreur($e->getMessage()); // On appel une instance de la fonction pageErreur contenu dans MainController EN PRIVATE
 }

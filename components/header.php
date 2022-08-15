@@ -33,7 +33,7 @@
                 Administration
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="admin/rights">Gérer les droits</a>
+                <a class="dropdown-item" href="<?= URL; ?>admin/rights">Gérer les droits</a>
             </div>
         </div>
         <?php endif ; ?>
