@@ -28,6 +28,13 @@ $articleController = new ArticleController; // J'instancie mon controller d'arti
 require_once "src/controllers/ArticleController.php";
 $articleController = new ArticleController; // J'instancie mon controller d'article
 
+// PARTIE ADMIN  Articles
+require_once "src/controllers/AdminArticlesController.php";
+$adminArticlesController = new AdminArticlesController; // J'instancie mon controller d'article
+
+// PARTIE ADMIN Commentaires
+require_once "src/controllers/AdminCommentsController.php";
+$adminCommentsController = new AdminCommentsController; // J'instancie mon controller d'article
 
 
 
@@ -78,6 +85,10 @@ try {
               case "rights": $adminController ->rights();
               break;
               case "validateUpdateRole": $adminController -> validateUpdateRole($_POST['login'],$_POST['role']);
+              break;
+              case "articlesManagement" : $adminArticlesController->ArticlesManagement();
+              break;
+              case "commentsManagement" : $adminCommentsController-> CommentsManagement();
               break;
               default : throw new Exception("La page n'existe pas, "."<a href='home'>retournez à l'accueil</a>");
           }

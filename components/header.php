@@ -34,6 +34,8 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="<?= URL; ?>admin/rights">Gérer les droits</a>
+                <a class="dropdown-item" href="<?= URL; ?>admin/articlesManagement">Gérer les articles</a>
+                <a class="dropdown-item" href="<?= URL; ?>admin/commentsManagement">Gérer les Commentaires</a>
             </div>
         </div>
         <?php endif ; ?>

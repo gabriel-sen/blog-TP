@@ -2,7 +2,7 @@
   <?php
     require_once("src/model/class/Article.class.php");
     require_once("src/model/ArticlesManager.php");
-    require_once "src/model/class/Article.class.php";
+    //require_once "src/model/class/Article.class.php";
 
     require_once("src/model/class/Comment.class.php");
     require_once("src/model/CommentManager.php");

@@ -15,7 +15,7 @@
             $data_page = [
                 "bodyClass" => "Admin",
                 "page_description" => "Page de gestion des utilisateurs",
-                "titre" => "Bienvenu sur l'espace administration",
+                "titre" => "Gestion des rôles :",
                 "users"=> $users,
                 "view" => "src/views/admin/rightsView.php",
                 "template" => "src/views/template.view.php",
