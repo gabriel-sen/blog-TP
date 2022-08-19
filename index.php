@@ -85,6 +85,8 @@ try {
     break;
     case "home" : $visitorController->accueil();
     break;
+    case "contact" : $visitorController ->contactForm();
+    break;
     case "articles" : $articlesController->afficherArticles(); // J'appel la fonction afficher livre présent dans mon controller d'article
     break;
     case "login" : $visitorController->login();

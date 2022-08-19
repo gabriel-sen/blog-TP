@@ -45,6 +45,20 @@
             $this->genererPage($data_page);
         }
 
+        public function contactForm(){
+            $senderName = Security::secureHTML($_POST['name']);
+            $senderMail = Security::secureHTML($_POST['email']);
+            $senderMessage = Security::secureHTML($_POST['message']);
+            if(!empty($senderName)& !empty($senderMail)& !empty($senderMessage)){
+                mail("salut.gaby@gmail.com", "Mail de : ".$senderName." Envoyé depuis le Blog", $senderMessage, $senderMail);
+                Toolbox::ajouterMessageAlerte("Mail envoyé avec succès ", Toolbox::COULEUR_VERTE);
+                header("Location:".URL.'home');
+            } else {
+                Toolbox::ajouterMessageAlerte("veuillez remplire tout les champs du formulaire pour envoyer un message à l'administrateur ", Toolbox::COULEUR_ROUGE);
+                header("Location:".URL.'home');
+            }
+        }
+
         public function pageErreur($msg){
             parent::pageErreur($msg); // on fait hériter l'objet pageErreur en passant la variable $msg pour y avoir accès sur toutes les pâges des visiteurs
         }
