@@ -38,8 +38,7 @@
           </div>
         </div>
 
-
-        <h2> Les commantaires : <p></h2>
+        <h2> Les commantaires : </h2>
         <?php 
           echo "<div class='comment-container'>" ;
           foreach($article-> getComments() as $comment){
@@ -50,10 +49,18 @@
           echo  "</div>"
         ?>
       </div>
-      <?php if(Security::islogged() && Security::isUser() || Security::isAdmin()) : ?>
+
+      <?php if(Security::islogged()) : ?>
         <?php include('loggedCommentsView.php'); ?>
       <?php endif ; ?>
       
+      <?php if(Security::isVisitor()) : ?>
+        <h4>Pour commenter, veuillez : </h4>
+        <a href="<?= URL; ?>login" target="_blank"> Vous connécter</a>
+        <p> ou sinon : </p>
+        <a href="<?= URL; ?>creataccount" target="_blank"> Créer unc ompte</a>
+      <?php endif ; ?>
+
   </section>
 <?php
   $titre= $article->getTitle();
