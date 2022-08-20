@@ -27,7 +27,7 @@
                 header("Location:".URL."login"); // rootage vers le login + message d'erreur 
             }
         }
-
+        // PROFILE
         public function profil(){
             $datas = $this->userManager->getUserInformation($_SESSION['profil']['login']);
             $_SESSION['profil']['username'] = $datas['username']; // Je stock en variable de session le username du profile via la requette de la fonction getUserInformation
@@ -48,7 +48,7 @@
             Toolbox::ajouterMessageAlerte("La déconnection du profile est établie avec succès, à bientot :)", Toolbox::COULEUR_VERTE);
             header("Location:".URL."home");
         }
-
+        // VALIDRATION CREATION DE COMPTE
         public function validation_creataccount($username,$login,$password){
             if($this->userManager->isLoginAvalable($login)){
                 $passwordCrypted = password_hash($password,PASSWORD_DEFAULT);
@@ -66,7 +66,7 @@
                 header("Location:".URL.'creataccount');
             }
         }
-
+        // ENVOIE DE MAIL 
         private function sendMailValidation($username,$login,$key){
             $urlVerification = URL."validationMail/".$login."/".$key;
             $subject = "Creation du compte sur le blog de Gabriel";
@@ -91,7 +91,6 @@
                 header("Location:".URL.'login');
             }
         }
-//TODO : montrer dès cette partie
         // MODIFICATION username
         public function validateUsernameModification($username){
             if($this->userManager->bdModificationUsername($_SESSION["profil"]["login"],$username)){
@@ -155,6 +154,7 @@
                 header("Location:".URL."compte/profil");
             }
         }
+        // CHANGER L'IMAGE DE PROFILE
         public function changeImage($file){
             
             try{
@@ -180,12 +180,14 @@
                 Toolbox::ajouterMessageAlerte($exeption->getMessage(),Toolbox::COULEUR_ROUGE);
             }
         }
+        // SUPPRESSION DE l'IMAGE
         private function fileUserImgDelet(){
             $oldImageName = $this->userManager->getImageUser($_SESSION['profil']['login']);
             if($oldImageName !== "profils/profil.jpg"){ 
                 unlink("public/Assets/images/".$oldImageName);
             }
         }
+
         public function pageErreur($msg){
             parent::pageErreur($msg); // on fait hériter l'objet pageErreur en passant la variable $msg pour y avoir accès sur toutes les pâges des visiteurs
         }

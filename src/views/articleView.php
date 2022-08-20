@@ -6,7 +6,8 @@
 
     require_once("src/model/class/Comment.class.php");
     require_once("src/model/CommentManager.php");
-    
+
+    require_once("src/controllers/UserController.php");
   ?>
   <section class="article">
     <div class="image-article-container">
@@ -49,7 +50,10 @@
           echo  "</div>"
         ?>
       </div>
-      <a href="/blog-TP/articles" class="btn btn-primary">retourner aux articles</a>
+      <?php if(Security::islogged() && Security::isUser() || Security::isAdmin()) : ?>
+        <?php include('loggedCommentsView.php'); ?>
+      <?php endif ; ?>
+      
   </section>
 <?php
   $titre= $article->getTitle();
