@@ -27,6 +27,10 @@
                 header("Location:".URL."login"); // rootage vers le login + message d'erreur 
             }
         }
+        //ENVOIE COMMENTAIRE 
+        public function commentSubmition(){
+            die(var_dump($_POST));
+        }
         // PROFILE
         public function profil(){
             $datas = $this->userManager->getUserInformation($_SESSION['profil']['login']);
@@ -49,12 +53,23 @@
             header("Location:".URL."home");
         }
         // VALIDRATION CREATION DE COMPTE
+        public function getValidationCreataccount($username,$login,$password){
+            if(!empty($username) && !empty($login) && !empty($password)){
+                $username = Security::secureHTML($_POST['username']);
+                $login = Security::secureHTML($_POST['login']);
+                $password = Security::secureHTML($_POST['password']);
+                $this->validation_creataccount($username,$login,$password);
+              }else{
+                  Toolbox::ajouterMessageAlerte("Veuillez remplire tout les champs du formulaire", Toolbox::COULEUR_ROUGE);
+                  header("Location:".URL.'creataccount');
+              }
+        }
         public function validation_creataccount($username,$login,$password){
             if($this->userManager->isLoginAvalable($login)){
                 $passwordCrypted = password_hash($password,PASSWORD_DEFAULT);
                 $key = rand(0,9999);
                 if($this->userManager->bdCreatAccount($username,$login,$key,$passwordCrypted,"profils/profil.jpg","user")){ // image de profile de base pour tout les utilisateurs
-                    $this->sendMailValidation($username,$login,$key,$passwordCrypted);
+                    $this->sendMailValidation($username,$login,$key);
                     Toolbox::ajouterMessageAlerte("Le compte a été créé, un mail de validation vous as été envoyé.)", Toolbox::COULEUR_VERTE);
                     header("Location:".URL."login");
                 }else{
@@ -69,7 +84,7 @@
         // ENVOIE DE MAIL 
         private function sendMailValidation($username,$login,$key){
             $urlVerification = URL."validationMail/".$login."/".$key;
-            $subject = "Creation du compte sur le blog de Gabriel";
+            $subject = "Creation du compte sur le blog de Gabriel pour ".$username;
             $message = "Pour valider votre compte, veuillez cliquer sur le lien suivant :".$urlVerification;
             Toolbox::sendMail($login,$subject,$message);
         }
@@ -91,6 +106,19 @@
                 header("Location:".URL.'login');
             }
         }
+        public function validationLogin(){
+            if(!empty($_POST['login']) && !empty($_POST['password'])){
+                $login = Security::secureHTML($_POST['login']);
+                //die(var_dump($login));
+                $password = Security::secureHTML($_POST['password']);
+                //die(var_dump($password));
+                $this->validation_login($login,$password);
+                //die(var_dump($userController));
+            } else{
+                Toolbox::ajouterMessageAlerte("login ou mot de passe incorecte ", Toolbox::COULEUR_ROUGE);
+                header("Location:".URL.'login');
+            }
+        }
         // MODIFICATION username
         public function validateUsernameModification($username){
             if($this->userManager->bdModificationUsername($_SESSION["profil"]["login"],$username)){
@@ -100,6 +128,7 @@
             }
             header("Location:".URL."compte/profil");
         }
+
         // MODIFICATION DE PASSWORD
         public function changePassword(){
             $data_page = [
