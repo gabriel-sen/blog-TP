@@ -1,6 +1,7 @@
 <?php
  require_once("./src/controllers/MainController.php");
  require_once("./src/model/UserManager.php");
+ require_once("./src/model/CommentManager.php");
 
     class UserController extends MainController{
         private $userManager;
@@ -28,8 +29,8 @@
             }
         }
         //ENVOIE COMMENTAIRE 
-        public function commentSubmition(){
-            die(var_dump($_POST));
+        public function commentSubmition(){          
+            $this->CommentManager->sendComments();
         }
         // PROFILE
         public function profil(){

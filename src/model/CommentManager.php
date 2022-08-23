@@ -32,4 +32,7 @@
             }
             return $results;
         }
+        public function sendComments(){
+            die(var_dump($_POST));
+        }
     }

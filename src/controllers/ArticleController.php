@@ -1,5 +1,6 @@
 <?php
-require_once "src/model/articlesManager.php";
+require_once "src/model/ArticlesManager.php";
+require_once("src/model/UserManager.php");
 
 class ArticleController extends MainController{
     private $articleManager; // 4) Cette instance est disponnible dans l'attribut Private

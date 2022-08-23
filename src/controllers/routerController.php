@@ -65,6 +65,8 @@ try {
                 break;
                 case "validationChangeProfileImage" : $userController-> changeImage($_FILES['img']);
                 break;
+                case "commentSubmition" : $userController -> commentSubmition();
+                break;
                 default : throw new Exception("La page n'existe pas, "."<a href='../home'>retournez à l'accueil</a>");
             }
         }
@@ -107,8 +109,6 @@ try {
     case "validationMail" : $userController->Validation_mailAccount($url[1],$url[2]);
     break;
     case "resendMail" : $userController->resendMail($url[1]);
-    break;
-    case "commentSubmition" : $userController -> commentSubmition();
     break;
     case 1 === preg_match('#articleContent\/([\d]+)#', $_GET['page'], $matches) : $articleController->afficherArticle($matches[1]); // REGEX
     break;
