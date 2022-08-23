@@ -6,8 +6,6 @@
 
     require_once("src/model/class/Comment.class.php");
     require_once("src/model/CommentManager.php");
-
-    require_once("src/controllers/UserController.php");
   ?>
   <section class="article">
     <div class="image-article-container">

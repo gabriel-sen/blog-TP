@@ -28,6 +28,11 @@ $articleController = new ArticleController; // J'instancie mon controller d'arti
 require_once "AdminArticlesController.php";
 $adminArticlesController = new AdminArticlesController; // J'instancie mon controller d'article
 
+// PARTIE COmmentaire des articles
+require_once "CommentController.php";
+$commentController = new CommentController; // J'instancie mon controller d'article
+
+
 // PARTIE ADMIN Commentaires
 require_once "AdminCommentsController.php";
 $adminCommentsController = new AdminCommentsController; // J'instancie mon controller d'article
@@ -65,7 +70,7 @@ try {
                 break;
                 case "validationChangeProfileImage" : $userController-> changeImage($_FILES['img']);
                 break;
-                case "commentSubmition" : $userController -> commentSubmition();
+                case "commentSubmition" : $commentController -> commentSubmition();
                 break;
                 default : throw new Exception("La page n'existe pas, "."<a href='../home'>retournez à l'accueil</a>");
             }
@@ -111,6 +116,16 @@ try {
     case "resendMail" : $userController->resendMail($url[1]);
     break;
     case 1 === preg_match('#articleContent\/([\d]+)#', $_GET['page'], $matches) : $articleController->afficherArticle($matches[1]); // REGEX
+    /*
+    Quand ta regex commence par # alors elle doit finir par # C'est le délimiteur qui indique à php quand commence et quand finit la regex. 
+    "articleContent" c'est ni plus ni moins ça tel que c'est écrit
+    En regex, le slash c'est un delimiteur comme #. Alors pour faire comprendre que c'est vraiment le slash que tu veux, tu dois l'escape avec un backslash \
+    ( quelque chose ) c'est pour dire que c'est un groupe mais il sert uniquement lorsque tu veux récupérer la valeur situé entre ()
+    [\d] c'est spécifique aux regex pour dire que c'est un chiffre de 0 à 9
+    Le + sert à dire que tu as ton truc 1 fois ou N fois
+    donc [\d]+ ça veut dire 0 à infini
+    Si tu mets pas le + alors c'est 0 à 9 uniquement
+    */
     break;
     default : throw new Exception("La page n'existe pas, "."<a href='home'>retournez à l'accueil</a>");
   }

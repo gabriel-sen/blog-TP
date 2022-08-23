@@ -29,7 +29,9 @@
             }
         }
         //ENVOIE COMMENTAIRE 
-        public function commentSubmition(){          
+        public function commentSubmition(){        
+            $id = $this->userManager->getUserInformation($_SESSION['profil']['login']);
+            $_SESSION['profil']['user_id'] = $id['user_id'];  
             $this->CommentManager->sendComments();
         }
         // PROFILE
@@ -38,6 +40,7 @@
             $_SESSION['profil']['username'] = $datas['username']; // Je stock en variable de session le username du profile via la requette de la fonction getUserInformation
             $_SESSION['profil']['role'] = $datas['role'];
             $_SESSION['profil']['img'] = $datas['img'];
+            
             $data_page = [
                 "bodyClass" => "profil",
                 "page_description" => "Page de profil",
