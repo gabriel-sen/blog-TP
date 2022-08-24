@@ -44,7 +44,7 @@ class UserManager extends MainManager{
         $result = $statment->fetch(PDO::FETCH_ASSOC); 
         $statment->closeCursor(); 
         return $result;
-        die(var_dump($result));
+        //die(var_dump($result));
     }
     // REQUETTE CREATION DE COMPTE
     public function bdCreatAccount($username,$login,$key,$passwordCrypted,$img,$role){

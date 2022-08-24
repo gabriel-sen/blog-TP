@@ -32,7 +32,23 @@
             }
             return $results;
         }
-        public function sendComments(){
-            die(var_dump($_POST));
-        }
+
+    public function sendComments($user_id,$comment_article_id,$comment_text,$comment_date){
+        
+        $req = "INSERT INTO comments ( user_id, comment_article_id, comment_text, comment_date) 
+                VALUES ( :user_id, :comment_article_id, :comment_text, :comment_date)";
+        $statment = $this->getBdd()->prepare($req);
+        
+        //$statment->bindValue(":comment_id",$comment_id,PDO::PARAM_STR);
+        $statment->bindValue(":user_id",$user_id,PDO::PARAM_STR);
+        $statment->bindValue(":comment_article_id",$comment_article_id,PDO::PARAM_STR);
+        $statment->bindValue(":comment_text",$comment_text,PDO::PARAM_STR);
+        $statment->bindValue(":comment_date",$comment_date,PDO::PARAM_STR);
+        //$statment->bindValue(":statut",$statut,PDO::PARAM_STR);
+        $statment->execute();
+        //die(var_dump($statment));
+        $isChanged = ($statment->rowCount() > 0);
+        $statment->closeCursor();
+        return $isChanged;
+    }
     }

@@ -5,6 +5,8 @@
 
     class CommentController extends MainController{
         private $commentManager;
+        private $userManager;
+        private $articleManager;
 
         public function __construct()
         {
@@ -13,9 +15,13 @@
         }
         //ENVOIE COMMENTAIRE 
         public function commentSubmition(){      
-            $id = $this->userManager->getUserInformation($_SESSION['profil']['login']);
-            $_SESSION['profil']['user_id'] = $id['user_id'];  
-            $this->commentManager->sendComments();
+            //$comment_id= $_POST['comment_id'];
+            $user_id= $_POST['user_id'];
+            $article_id= $_POST['article_id'];
+            $comment_text= $_POST['comment_text'];
+            $comment_date= $_POST['comment_date'];
+            //$statut=  $_POST['statut'];
+            $this->commentManager->sendComments($user_id,$article_id,$comment_text,$comment_date);
         }
         public function pageErreur($msg){
             parent::pageErreur($msg); // on fait hériter l'objet pageErreur en passant la variable $msg pour y avoir accès sur toutes les pâges des visiteurs
