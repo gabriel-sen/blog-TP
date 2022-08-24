@@ -2,14 +2,6 @@
     <h4> Votre image de profil : </h4>
     <img src="../public/assets/images/<?= $userData['img']?>"class="image-profil" alt="Image du profile">
 
-    <?php /*
-      if(empty($article->getImage())){
-        echo '<img src="'.$imgBase.'"class="image-article" alt="...">';
-      }else {
-        echo '<img src="'.$article->getImage().'" class="image-article" alt="...">';
-      }
-    */?>
-
     <form method="POST" action="<?= URL ?>compte/validationChangeProfileImage" enctype="multipart/form-data">
       <label for="changeImg">Changer l'image de profile :</label> <br>
       <input name="img" type="file" class="form-control-file" id="changeImg" onchange="submit();"/>

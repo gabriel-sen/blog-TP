@@ -1,19 +1,17 @@
 <?php
 require_once ("src/model/ArticlesManager.php");
 require_once("src/model/UserManager.php");
-require_once("src/model/CommentManager.php");
 
 class ArticleController extends MainController{
     private $articleManager; // 4) Cette instance est disponnible dans l'attribut Private
-    private $commentManager;
     private $userManager;
-    public function afficherArticle(string $id){
 
+    public function afficherArticle(string $id){
         $article = $this->articleManager->getArticle($id); // 5) Je récupère tout mes articles que je stock dans ma variable .
         $dataIdUser = $this->userManager->getUserInformation($_SESSION['profil']['login']);
         $_SESSION['profil']['user_id'] = $dataIdUser['user_id'];
         $data_page = [
-            "bodyClass" => "articles",
+            "bodyClass" => "article",
             "imgBase" => "../public/assets/images/article/articleBase.png",
             "page_description" => "ceci est un article du blog de gabriel sen",
             "view" => "src/views/articleView.php",
