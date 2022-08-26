@@ -47,12 +47,10 @@
           echo  "</div>"
         ?>
       </div>
-
-      <?php if(Security::islogged()) : ?>
+      <?php if(Security::isLogged()): ?>
         <?php include('loggedCommentsView.php'); ?>
       <?php endif ; ?>
-      
-      <?php if(Security::isVisitor()) : ?>
+      <?php if(!Security::islogged()): ?>
         <h4>Pour commenter, veuillez : </h4>
         <a href="<?= URL; ?>login" target="_blank"> Vous connécter</a>
         <p> ou sinon : </p>

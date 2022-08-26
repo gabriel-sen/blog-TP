@@ -5,9 +5,9 @@ class Security{
         return htmlentities($chaine); // supressiond es caractères speciaux 
     }
     public static function isVisitor(){
-        return (empty($_SESSION['profil'])); //si l'utilistaur est un visiteur
+        return (empty($_SESSION['profil']['role'])); //si visiteur, sa sessione est null
     }
-    public static function islogged(){
+    public static function isLogged(){
         return (!empty($_SESSION['profil'])); //si l'utilistaur est connécté
     }
     public static function isUser(){

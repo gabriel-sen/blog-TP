@@ -27,7 +27,7 @@
                 </li>
             <?php endif ; ?>
         </ul>
-        <?php if(Security::islogged() && Security::isAdmin()) : ?>
+        <?php if(Security::isLogged() && Security::isAdmin()): ?>
         <div class="dropdown">
             <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Administration

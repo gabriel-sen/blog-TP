@@ -1,4 +1,8 @@
 <?= 
+session_start(); // gestion des profiles des utilisateurs 
+
+define("URL", str_replace("index.php","",(isset($_SERVER['HTTPS'])? "https" : "http").
+    "://".$_SERVER['HTTP_HOST'].$_SERVER["PHP_SELF"])); // "constante URL" toutes les demandes pointent toujours sur la racide du site.
 
 // PARTIE UTILITAIRES
 require_once "ToolboxController.php";
@@ -31,7 +35,6 @@ $adminArticlesController = new AdminArticlesController; // J'instancie mon contr
 // PARTIE COmmentaire des articles
 require_once "CommentController.php";
 $commentController = new CommentController; // J'instancie mon controller d'article
-
 
 // PARTIE ADMIN Commentaires
 require_once "AdminCommentsController.php";
