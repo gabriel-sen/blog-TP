@@ -25,9 +25,6 @@ $articlesController = new ArticlesController; // J'instancie mon controller d'ar
 require_once "ArticleController.php";
 $articleController = new ArticleController; // J'instancie mon controller d'article
 
-require_once "ArticleController.php";
-$articleController = new ArticleController; // J'instancie mon controller d'article
-
 // PARTIE ADMIN  Articles
 require_once "AdminArticlesController.php";
 $adminArticlesController = new AdminArticlesController; // J'instancie mon controller d'article
@@ -51,7 +48,7 @@ try {
       $url = explode("/", filter_var($_GET['page'],FILTER_SANITIZE_URL)); // accéder à des sous dossier pour les compte/profile
       $page = $url[0]; // On stock sous forme de tableau le bon switch case de chaque pages
   }
-
+  //die(var_dump($url));
   switch($page){
     case "compte" : 
         if(!Security::islogged()){
@@ -83,9 +80,6 @@ try {
       if(!Security::isAdmin()){
         Toolbox::ajouterMessageAlerte("Veuillez vous connécter avec un compt administrateur", Toolbox::COULEUR_ROUGE);
         header("Location:".URL.'login');
-      } elseif(!Security::isAdmin()){
-          Toolbox::ajouterMessageAlerte("Vous n'êtes plus administrateur.", Toolbox::COULEUR_ROUGE);
-          header("Location:".URL.'home');
       } else {
           switch($url[1]){
               case "rights": $adminController ->rights();
@@ -118,17 +112,7 @@ try {
     break;
     case "resendMail" : $userController->resendMail($url[1]);
     break;
-    case 1 === preg_match('#articleContent\/([\d]+)#', $_GET['page'], $matches) : $articleController->afficherArticle($matches[1]); // REGEX
-    /*
-    Quand ta regex commence par # alors elle doit finir par # C'est le délimiteur qui indique à php quand commence et quand finit la regex. 
-    "articleContent" c'est ni plus ni moins ça tel que c'est écrit
-    En regex, le slash c'est un delimiteur comme #. Alors pour faire comprendre que c'est vraiment le slash que tu veux, tu dois l'escape avec un backslash \
-    ( quelque chose ) c'est pour dire que c'est un groupe mais il sert uniquement lorsque tu veux récupérer la valeur situé entre ()
-    [\d] c'est spécifique aux regex pour dire que c'est un chiffre de 0 à 9
-    Le + sert à dire que tu as ton truc 1 fois ou N fois
-    donc [\d]+ ça veut dire 0 à infini
-    Si tu mets pas le + alors c'est 0 à 9 uniquement
-    */
+    case "articleContent" : $articleController->afficherArticle($url[1]);
     break;
     default : throw new Exception("La page n'existe pas, "."<a href='home'>retournez à l'accueil</a>");
   }

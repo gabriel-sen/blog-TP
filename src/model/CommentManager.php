@@ -7,13 +7,11 @@
         // AFFICHER ARTICLE SEUL 
         public function getComments(string $articleId){
             $req = $this->getBdd()->prepare(
-                'SELECT *, user.username 
+                'SELECT comments.comment_id, comments.comment_text,comments.comment_date,comments.`user_id`, user.username 
                 FROM comments 
-                INNER JOIN articles 
-                ON comments.comment_article_id = articles.articles_id 
                 INNER JOIN user 
-                ON  user.user_id = comments.user_id 
-                WHERE articles.articles_id = :articleId');
+                ON comments.user_id = user.user_id 
+                WHERE comment_article_id = :articleId');
             $req->bindParam('articleId', $articleId, PDO::PARAM_INT);
             $req->execute();
             $comments = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -27,8 +25,8 @@
                     $comment['comment_id'],
                     $comment['username'],
                     $comment['comment_text'],
-                    $comment['comment_date'],
-                    $comment['username']);
+                    $comment['comment_date']
+                );
             }
             return $results;
         }
@@ -49,4 +47,5 @@
         $statment->closeCursor();
         return $isChanged;
     }
-    }
+
+}

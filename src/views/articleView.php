@@ -38,13 +38,13 @@
 
         <h2> Les commantaires : </h2>
         <?php 
-          echo "<div class='comment-container'>" ;
-          foreach($article-> getComments() as $comment){
-            echo  "<h5> le commentaire  de ".$comment->getComAuthor() ."</h5>"
-            ."<p>".$comment->getComTexte() ."</p>";
-            
+          if($article-> getComments() === []){
+            echo  "<p> Cette article ne dispose pas de commantaires </p>";
           }
-          echo  "</div>"
+            foreach($article-> getComments() as $comment){
+              echo  "<h5> le commentaire  de ".$comment->getComAuthor() ."</h5>"
+              ."<p>".$comment->getComTexte() ."</p>";
+            }
         ?>
       </div>
       <?php if(Security::isLogged()): ?>

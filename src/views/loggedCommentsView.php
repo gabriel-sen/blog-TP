@@ -34,7 +34,7 @@
           </div>
           <div class="form-group mb-4">
             <label for="comTexte" >Votre message</label>
-            <textarea class="form-control" id="message" name="comment_text" value="<?=$comment->getComTexte();?>" rows="3" placeholder=" Votre message ici"></textarea>
+            <textarea class="form-control" id="message" name="comment_text" rows="3" placeholder=" Votre message ici"></textarea>
           </div>
         <button type="submit" class="btn btn-primary">Envoyer votre message</button>
       </form>

@@ -8,7 +8,6 @@ class ArticleController extends MainController{
     private $userManager;
 
     public function afficherArticle(string $id){
-        
         $article = $this->articleManager->getArticle($id); // 5) Je récupère tout mes articles que je stock dans ma variable .
         if(Security::isVisitor()){
             $data_page = [
