@@ -47,15 +47,16 @@ class UserManager extends MainManager{
         //die(var_dump($result));
     }
     // REQUETTE CREATION DE COMPTE
-    public function bdCreatAccount($username,$login,$key,$passwordCrypted,$img){
+    public function bdCreatAccount($username,$login,$key,$passwordCrypted,$img,$role){
         $req = "INSERT INTO user (username, email, password, img, role, is_valid, clef) 
-                VALUES (:username, :email, :password, :img,'user', 0, :clef)";
+                VALUES (:username, :email, :password, :img,:role, 0, :clef)";
         $statment = $this->getBdd()->prepare($req);
         $statment->bindValue(":username",$username,PDO::PARAM_STR);
         $statment->bindValue(":email",$login,PDO::PARAM_STR);
         $statment->bindValue(":clef",$key,PDO::PARAM_INT);
         $statment->bindValue(":password",$passwordCrypted,PDO::PARAM_STR);
         $statment->bindValue(":img",$img,PDO::PARAM_STR);
+        $statment->bindValue(":role",$role,PDO::PARAM_STR);
         $statment->execute();
         $isChanged = ($statment->rowCount() > 0);
         $statment->closeCursor();

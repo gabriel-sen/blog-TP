@@ -2,6 +2,7 @@
 
 body{
     position: relative;
+    padding-top: 5rem;
 }
 
 @import '_card';
@@ -9,4 +10,5 @@ body{
 @import '_comments';
 @import '_article';
 @import '_fontawesome';
+@import '_header';
 @import '_home';

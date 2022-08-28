@@ -2,11 +2,10 @@
   <?php
     require_once("src/model/class/Article.class.php");
     require_once("src/model/ArticlesManager.php");
-    require_once "src/model/class/Article.class.php";
+    //require_once "src/model/class/Article.class.php";
 
     require_once("src/model/class/Comment.class.php");
     require_once("src/model/CommentManager.php");
-    
   ?>
   <section class="article">
     <div class="image-article-container">
@@ -37,19 +36,27 @@
           </div>
         </div>
 
-
-        <h2> Les commantaires : <p></h2>
+        <h2> Les commantaires : </h2>
         <?php 
-          echo "<div class='comment-container'>" ;
-          foreach($article-> getComments() as $comment){
-            echo  "<h5> le commentaire  de ".$comment->getComAuthor() ."</h5>"
-            ."<p>".$comment->getComTexte() ."</p>";
-            
+          if($article-> getComments() === []){
+            echo  "<p> Cette article ne dispose pas de commantaires </p>";
           }
-          echo  "</div>"
+            foreach($article-> getComments() as $comment){
+              echo  "<h5> le commentaire  de ".$comment->getComAuthor() ."</h5>"
+              ."<p>".$comment->getComTexte() ."</p>";
+            }
         ?>
       </div>
-      <a href="/blog-TP/articles" class="btn btn-primary">retourner aux articles</a>
+      <?php if(Security::isLogged()): ?>
+        <?php include('loggedCommentsView.php'); ?>
+      <?php endif ; ?>
+      <?php if(!Security::islogged()): ?>
+        <h4>Pour commenter, veuillez : </h4>
+        <a href="<?= URL; ?>login" target="_blank"> Vous connécter</a>
+        <p> ou sinon : </p>
+        <a href="<?= URL; ?>creataccount" target="_blank"> Créer unc ompte</a>
+      <?php endif ; ?>
+
   </section>
 <?php
   $titre= $article->getTitle();

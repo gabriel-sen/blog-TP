@@ -1,5 +1,6 @@
 body {
   position: relative;
+  padding-top: 5rem;
 }
 
 .container_articles .card {
@@ -19,12 +20,13 @@ body {
   padding: 2rem;
 }
 
-.article h1 {
+body.article h1 {
   color: #fff;
   text-shadow: black 1px 0 10px;
-  margin-top: 4em;
+  margin-top: 2em;
 }
-.article .image-article-container {
+
+section.article .image-article-container {
   position: absolute;
   z-index: -1;
   top: 0;
@@ -33,20 +35,20 @@ body {
   width: 100vw;
   overflow: hidden;
 }
-.article .image-article-container .image-article {
+section.article .image-article-container .image-article {
   width: 100vw;
 }
-.article .container_articles {
+section.article .container_articles {
   margin-top: 10rem;
   padding: 2rem;
   background-color: white;
 }
-.article .container_articles .article-text {
+section.article .container_articles .article-text {
   margin-top: 3rem;
   margin-bottom: 3rem;
   line-height: 1.7rem;
 }
-.article .container_articles .article_info .row {
+section.article .container_articles .article_info .row {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
@@ -54,6 +56,12 @@ body {
 i {
   font-size: 1.5rem;
   margin-right: 1rem;
+}
+
+nav.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .home h1 {
