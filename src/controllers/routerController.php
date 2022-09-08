@@ -90,6 +90,10 @@ try {
               break;
               case "commentsManagement" : $adminCommentsController-> CommentsManagement();
               break;
+              case "adminDeletComment" : $adminCommentsController-> deletComment();
+              break;
+              case "adminValidateComment" : $adminCommentsController-> validateComment();
+              break;
               default : throw new Exception("La page n'existe pas, "."<a href='home'>retournez à l'accueil</a>");
           }
       }
