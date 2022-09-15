@@ -7,6 +7,11 @@ body:first-child {
   font-size: 2em;
 }
 
+.add_aricle_wrapper form {
+  display: flex;
+  flex-direction: column;
+}
+
 .container_articles .card {
   width: 100%;
 }

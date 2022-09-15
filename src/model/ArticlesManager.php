@@ -75,4 +75,45 @@
                 $this->commentsManager -> getComments($id),
             );
         }
+        public function dbAddArticle($article_id,
+                                        $article_author_id,
+                                        $article_image,
+                                        $article_title,
+                                        $article_subtitle,
+                                        $article_content,
+                                        $article_date_creation,
+                                        $article_date_modification){
+            $req = "INSERT INTO articles (
+                                        articles_id, 
+                                        article_author_id, 
+                                        article_image, 
+                                        article_title, 
+                                        article_subtitle, 
+                                        article_content,
+                                        article_date_creation, 
+                                        article_date_modification)
+                    VALUES (
+                            :articles_id, 
+                            :article_author_id, 
+                            :article_image, 
+                            :article_title, 
+                            :article_subtitle, 
+                            :article_content, 
+                            :article_date_creation, 
+                            :article_date_modification)";
+                    
+            $statment = $this->getBdd()->prepare($req);
+            $statment->bindValue(":articles_id",$article_id,PDO::PARAM_STR);
+            $statment->bindValue(":article_author_id",$article_author_id,PDO::PARAM_INT);
+            $statment->bindValue(":article_image",$article_image,PDO::PARAM_STR);
+            $statment->bindValue(":article_title",$article_title,PDO::PARAM_STR);
+            $statment->bindValue(":article_subtitle",$article_subtitle,PDO::PARAM_STR);
+            $statment->bindValue(":article_content",$article_content,PDO::PARAM_STR);
+            $statment->bindValue(":article_date_creation",$article_date_creation,PDO::PARAM_STR);
+            $statment->bindValue(":article_date_modification",$article_date_modification,PDO::PARAM_STR);
+            $statment->execute();
+            $isChanged = ($statment->rowCount() > 0);
+            $statment->closeCursor();
+            return $isChanged;
+        }
     }

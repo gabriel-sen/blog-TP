@@ -3,9 +3,7 @@
     require_once("src/model/ArticlesManager.php");
   
   ?>
-  <div class="flex-cnotainer">
-    
-  </div>
+
   <?php 
     for($i=0; $i < count($articles); $i++): 
   ?>
