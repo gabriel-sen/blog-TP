@@ -42,8 +42,10 @@
             echo  "<p> Cette article ne dispose pas de commantaires </p>";
           }
             foreach($article-> getComments() as $comment){
-              echo  "<h5> le commentaire  de ".$comment->getComAuthor() ."</h5>"
-              ."<p>".$comment->getComTexte() ."</p>";
+              if($comment->getComStatut() == 2){
+                echo  "<h5> le commentaire  de ".$comment->getComAuthor() ."</h5>"
+                ."<p>".$comment->getComTexte() ."</p>";
+              }
             }
         ?>
       </div>

@@ -3,7 +3,6 @@
     require_once("src/model/ArticlesManager.php");
 
   ?>
-
 <?php 
     for($i=0; $i < count($articles); $i++): 
   ?>

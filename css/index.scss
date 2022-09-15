@@ -4,7 +4,11 @@ body{
     position: relative;
     padding-top: 5rem;
 }
+body:first-child {
+    font-size: 2em;
+  }
 
+@import 'articles';
 @import '_card';
 @import '_login';
 @import '_comments';
@@ -12,3 +16,4 @@ body{
 @import '_fontawesome';
 @import '_header';
 @import '_home';
+@import '_admin';

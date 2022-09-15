@@ -5,13 +5,14 @@ class Comment{
     private $commentAuthor;
     private $commentTexte;
     private $commentDate;
+    private $commentStatut;
 
-    public function __construct($id,$commentAuthor,$commentTexte,$commentDate){
+    public function __construct($id,$commentAuthor,$commentTexte,$commentDate,$commentStatut){
         $this->id = $id;
         $this->author = $commentAuthor;
         $this->texte = $commentTexte;
         $this->date = $commentDate;
-
+        $this->statut = $commentStatut;
     }
 
     public function getComId(){return $this->id;}
@@ -25,5 +26,8 @@ class Comment{
     
     public function getComDate(){return $this->date;}
     public function setComDate($commentDate){$this->commentDate = $commentDate;}
+
+    public function getComStatut(){return $this->statut;}
+    public function setComStatut($commentStatut){$this->commentStatut = $commentStatut;}
 
 }

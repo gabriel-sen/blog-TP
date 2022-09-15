@@ -13,6 +13,7 @@
             $this->userManager = new UserManager();
             $this->articleController = new ArticleController;
         }
+
         //ENVOIE COMMENTAIRE 
         public function commentSubmition(){      
             $user_id= $_POST['user_id'];

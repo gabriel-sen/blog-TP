@@ -2,6 +2,7 @@
 require_once ("src/model/ArticlesManager.php");
 require_once("src/model/UserManager.php");
 require_once("src/model/CommentManager.php");
+require_once("UserController.php");
 
 class ArticleController extends MainController{
     private $articleManager; // 4) Cette instance est disponnible dans l'attribut Private
@@ -33,7 +34,7 @@ class ArticleController extends MainController{
                 "template" => "src/views/template.view.php",
                 "article" => $article,
                 "articleId" => $article->getId(),
-                "user_id"=> $_SESSION['profil']['user_id'],
+                "user_id"=> $_SESSION['profil']['user_id'], 
             ];
             $this->genererPage($data_page);
         }

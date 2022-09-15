@@ -90,6 +90,12 @@ try {
               break;
               case "commentsManagement" : $adminCommentsController-> CommentsManagement();
               break;
+              case "adminDeletComment" : $adminCommentsController-> deletComment();
+              break;
+              case "adminValidateComment" : $adminCommentsController-> validateComment();
+              break;
+              case "adminDeletArticle" : $adminArticlesController-> deletArticle();
+              break;
               default : throw new Exception("La page n'existe pas, "."<a href='home'>retournez à l'accueil</a>");
           }
       }
@@ -113,6 +119,8 @@ try {
     case "resendMail" : $userController->resendMail($url[1]);
     break;
     case "articleContent" : $articleController->afficherArticle($url[1]);
+    break;
+    case "addArticle" : $articlesController-> addArticle();
     break;
     default : throw new Exception("La page n'existe pas, "."<a href='home'>retournez à l'accueil</a>");
   }

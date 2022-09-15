@@ -7,7 +7,7 @@
         // AFFICHER ARTICLE SEUL 
         public function getComments(string $articleId){
             $req = $this->getBdd()->prepare(
-                'SELECT comments.comment_id, comments.comment_text,comments.comment_date,comments.`user_id`, user.username 
+                'SELECT comments.comment_id, comments.comment_text,comments.comment_date,comments.statut,comments.`user_id`, user.username 
                 FROM comments 
                 INNER JOIN user 
                 ON comments.user_id = user.user_id 
@@ -25,7 +25,8 @@
                     $comment['comment_id'],
                     $comment['username'],
                     $comment['comment_text'],
-                    $comment['comment_date']
+                    $comment['comment_date'],
+                    $comment['statut']
                 );
             }
             return $results;

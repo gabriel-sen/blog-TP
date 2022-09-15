@@ -19,6 +19,14 @@ class AdminArticlesController extends MainController{
         $this->genererPage($data_page);
 
     }
+
+    public function deletArticle(){
+        $articleId = $_POST['article_id'];
+        //die(var_dump($comId));
+        $this->adminManager->requestDeletComment($articleId);
+        Toolbox::ajouterMessageAlerte("Article supprimé.", Toolbox::COULEUR_VERTE);
+        header("Location:".URL.'admin/articlesManagement');
+    }
     
     public function __construct(){ // 1) au moment de la construction
         $this->articlesManager = new ArticlesManager(new CommentsManager); // 2) J'instantie un nouvel article depuis son objet
