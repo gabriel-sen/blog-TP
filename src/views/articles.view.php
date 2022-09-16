@@ -22,7 +22,7 @@
         </div>
         <div class="modal-body">  
           <div class="add_aricle_wrapper">
-            <form action="addArticle" method="post">
+            <form action="<?= URL ?>compte/addArticle" method="post">
               <!--L'id de l'article  -->
               <input type="hidden" name="article_id" value="<?php echo $myuuid; ?>">
               <!--Ajouter une Titre-->
@@ -50,9 +50,11 @@
                 <input class="form-control" type="hidden" type="text" name="article_author_id" value="<?=$_SESSION['profil']['user_id'];?>">
               </div>
               <!--Ajouter une date de publication -->
-              <input type="hidden" name="article_date_creation" value="<?php echo date('d-m-Y');?>">
+              <input type="hidden" name="article_date_creation" value="<?php echo date('Y-m-d');?>">
               <!--Ajouter une date de modification -->
-              <input type="hidden" name="article_date_modification" value="<?php echo date('d-m-Y');?>">
+              <input type="hidden" name="article_date_modification" value="<?php echo date('Y-m-d');?>">
+              <!--Ajouter un status -->
+              <input type="hidden" name="article_statut" value="0">
             </div>
           </div>
           <div class="modal-footer">

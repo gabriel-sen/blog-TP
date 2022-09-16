@@ -75,23 +75,28 @@
                 $this->commentsManager -> getComments($id),
             );
         }
-        public function dbAddArticle($article_id,
-                                        $article_author_id,
-                                        $article_image,
-                                        $article_title,
-                                        $article_subtitle,
-                                        $article_content,
-                                        $article_date_creation,
-                                        $article_date_modification){
-            $req = "INSERT INTO articles (
+
+        public function dbAddArticle(
+                                    $article_id,
+                                    $article_author_id,
+                                    $article_new_name,
+                                    $article_title,
+                                    $article_subtitle,
+                                    $article_content,
+                                    $article_date_creation,
+                                    $article_date_modification,
+                                    $article_statut
+                                    ){
+            $req = "INSERT INTO articles(
                                         articles_id, 
                                         article_author_id, 
                                         article_image, 
                                         article_title, 
                                         article_subtitle, 
-                                        article_content,
+                                        article_content, 
                                         article_date_creation, 
-                                        article_date_modification)
+                                        article_date_modification,
+                                        article_statut) 
                     VALUES (
                             :articles_id, 
                             :article_author_id, 
@@ -100,19 +105,22 @@
                             :article_subtitle, 
                             :article_content, 
                             :article_date_creation, 
-                            :article_date_modification)";
+                            :article_date_modification,
+                            :article_statut)";
                     
             $statment = $this->getBdd()->prepare($req);
             $statment->bindValue(":articles_id",$article_id,PDO::PARAM_STR);
             $statment->bindValue(":article_author_id",$article_author_id,PDO::PARAM_INT);
-            $statment->bindValue(":article_image",$article_image,PDO::PARAM_STR);
+            $statment->bindValue(":article_image",$article_new_name,PDO::PARAM_STR);
             $statment->bindValue(":article_title",$article_title,PDO::PARAM_STR);
             $statment->bindValue(":article_subtitle",$article_subtitle,PDO::PARAM_STR);
             $statment->bindValue(":article_content",$article_content,PDO::PARAM_STR);
             $statment->bindValue(":article_date_creation",$article_date_creation,PDO::PARAM_STR);
             $statment->bindValue(":article_date_modification",$article_date_modification,PDO::PARAM_STR);
+            $statment->bindValue(":article_statut",$article_statut,PDO::PARAM_INT);
             $statment->execute();
             $isChanged = ($statment->rowCount() > 0);
+            //die(var_dump($isChanged));
             $statment->closeCursor();
             return $isChanged;
         }

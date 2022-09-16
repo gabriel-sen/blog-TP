@@ -37,21 +37,22 @@ class ArticlesController extends MainController{
         $this->genererPage($data_page);
     }
     public function addArticle(){
-        if (!empty($_POST)){
-            $article_image = $_POST['article_image'];
-            $article_id = $_POST['article_id'];
-            $article_author_id = $_POST['article_author_id'];
-            $article_title = $_POST['article_title'];
-            $article_subtitle = $_POST['article_subtitle'];
-            $article_content = $_POST['article_content'];
-            $article_date_creation = $_POST['article_date_creation'];
-            $article_date_modification = $_POST['article_date_modification'];
-            //die(var_dump($article_image));
+        $article_id = $_POST['article_id'];
+        $article_author_id = $_POST['article_author_id']; 
+        $article_image = $_POST['article_image'];
+        $article_title = $_POST['article_title'];
+        $article_subtitle = $_POST['article_subtitle'];
+        $article_content = $_POST['article_content'];
+        $article_date_creation = $_POST['article_date_creation'];
+        $article_date_modification = $_POST['article_date_modification'];
+        $article_statut = $_POST['article_statut'];
+        //die(var_dump($_POST));
+        //die(var_dump($repository));
+        //die(var_dump($article_new_name));
+        if (!empty($article_id && $article_author_id && $article_image && $article_title && $article_subtitle && $article_content && $article_date_creation && $article_date_modification)){
             $repository = "./public/Assets/images/article/";
-            //die(var_dump($repository));
-            //$article_new_name = Toolbox::addImage($article_image,$repository);
-            //die(var_dump($article_new_name));
-            $this->articlesManager->dbAddArticle($article_image,$article_id,$article_author_id,$article_title,$article_subtitle,$article_content,$article_date_creation,$article_date_modification);
+            $article_new_name = Toolbox::addImage($article_image,$repository);
+            $this->articlesManager->dbAddArticle($article_id,$article_author_id,$article_new_name,$article_title,$article_subtitle,$article_content,$article_date_creation,$article_date_modification,$article_statut);
             //die(var_dump($this));
             Toolbox::ajouterMessageAlerte("L'article est envoyé en validation par l'administrateur.", Toolbox::COULEUR_VERTE);
             header("Location:".URL."articles");
@@ -63,6 +64,7 @@ class ArticlesController extends MainController{
     }
     
     public function __construct(){ // 1) au moment de la construction
+        $this->articlesManager = new ArticlesManager();
         $this->articlesManager = new ArticlesManager(new CommentsManager); // 2) J'instantie un nouvel article depuis son objet
         $this->articlesManager->chargeArticles(); // 3) J'y charge les données de la BD
         $this->userManager = new UserManager();
