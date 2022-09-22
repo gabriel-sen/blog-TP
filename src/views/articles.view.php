@@ -22,7 +22,7 @@
         </div>
         <div class="modal-body">  
           <div class="add_aricle_wrapper">
-            <form action="<?= URL ?>compte/addArticle" method="post">
+            <form action="<?= URL ?>compte/addArticle" method="post" enctype="multipart/form-data">
               <!--L'id de l'article  -->
               <input type="hidden" name="article_id" value="<?php echo $myuuid; ?>">
               <!--Ajouter une Titre-->

@@ -79,7 +79,7 @@
         public function dbAddArticle(
                                     $article_id,
                                     $article_author_id,
-                                    $article_new_name,
+                                    $article_image,
                                     $article_title,
                                     $article_subtitle,
                                     $article_content,
@@ -109,9 +109,11 @@
                             :article_statut)";
                     
             $statment = $this->getBdd()->prepare($req);
-            $statment->bindValue(":articles_id",$article_id,PDO::PARAM_STR);
+            $statment->bindValue(":articles_id",$article_id,PDO::PARAM_INT);
             $statment->bindValue(":article_author_id",$article_author_id,PDO::PARAM_INT);
-            $statment->bindValue(":article_image",$article_new_name,PDO::PARAM_STR);
+            //$file = fopen('path/to/image.jpg','rb');
+            //$file = fopen('./public/Assets/images/article/','rb');
+            $statment->bindValue(":article_image",$article_image,PDO::PARAM_STR);
             $statment->bindValue(":article_title",$article_title,PDO::PARAM_STR);
             $statment->bindValue(":article_subtitle",$article_subtitle,PDO::PARAM_STR);
             $statment->bindValue(":article_content",$article_content,PDO::PARAM_STR);

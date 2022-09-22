@@ -13,7 +13,7 @@
       if(empty($article->getImage())){
         echo '<img src="'.$imgBase.'"class="image-article" alt="...">';
       }else {
-        echo '<img src="'.$article->getImage().'" class="image-article" alt="...">';
+        echo '<img src="'.'.'.$article->getImage().'" class="image-article" alt="...">';
       }
     ?>
     </div>

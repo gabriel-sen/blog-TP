@@ -19,11 +19,10 @@ class Toolbox {
             self::ajouterMessageAlerte("Mail non envoyé", self::COULEUR_ROUGE);
         }
     }
-    // FONCTION D'AJOUT D'IMAGE
+    // FONCTION D'AJOUT D'IMAGE DE PROFILE
     public static function addImage($file, $dir){
         if(!isset($file['name']) || empty($file['name']))
             throw new Exception("Vous devez indiquer une image");
-
         if(!file_exists($dir)) mkdir($dir,0777); // Si le fichier n'existe pas pour ce profile, créer moi un repo
     
         $extension = strtolower(pathinfo($file['name'],PATHINFO_EXTENSION));
