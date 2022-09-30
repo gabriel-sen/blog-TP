@@ -20,12 +20,19 @@ class AdminArticlesController extends MainController{
 
     }
 
-    public function deletArticle(){
-        $articleId = $_POST['article_id'];
+    public function AdminDeletArticle(){
+        $artId = $_POST['article_id'];
         //die(var_dump($comId));
-        $this->adminManager->requestDeletComment($articleId);
-        Toolbox::ajouterMessageAlerte("Article supprimé.", Toolbox::COULEUR_VERTE);
-        header("Location:".URL.'admin/articlesManagement');
+        $this->adminManager->requestDeletArticle($artId);
+        Toolbox::ajouterMessageAlerte("Commentaire supprimé.", Toolbox::COULEUR_VERTE);
+        header("Location:".URL.'admin/commentsManagement');
+    }
+    public function AdminValidateArticle(){
+        $artId = $_POST['article_id'];
+        //die(var_dump($comId));
+        $this->adminManager->requestValidateArticle($artId);
+        Toolbox::ajouterMessageAlerte("Commentaire validé.", Toolbox::COULEUR_VERTE);
+        header("Location:".URL.'admin/commentsManagement');
     }
     
     public function __construct(){ // 1) au moment de la construction

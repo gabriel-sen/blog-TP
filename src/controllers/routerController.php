@@ -90,14 +90,18 @@ try {
               break;
               case "articlesManagement" : $adminArticlesController->ArticlesManagement();
               break;
+              case "adminDeletArticle" : $adminArticlesController->AdminDeletArticle();
+              break;
+              case "adminValidateArticle" : $adminArticlesController->adminValidateArticle();
+              break;
               case "commentsManagement" : $adminCommentsController-> CommentsManagement();
               break;
               case "adminDeletComment" : $adminCommentsController-> deletComment();
               break;
               case "adminValidateComment" : $adminCommentsController-> validateComment();
               break;
-              case "adminDeletArticle" : $adminArticlesController-> deletArticle();
-              break;
+              /*case "adminDeletArticle" : $adminArticlesController-> deletArticle();
+              break;*/
               default : throw new Exception("La page n'existe pas, "."<a href='home'>retournez à l'accueil</a>");
           }
       }

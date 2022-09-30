@@ -5,7 +5,9 @@
   ?>
 <?php 
     for($i=0; $i < count($articles); $i++): 
+      /*if($articles[$i]->getStatus()===2){*/
   ?>
+    
     <div class="card_articles col-md-4 container_articles">
       <div class="card">
         <?php
@@ -33,10 +35,13 @@
               <p><?=$articles[$i]->getModificationDate()?></p>
             </div>
           </div>
-          <a href="" class="btn btn-success">valider l'article</a>
+          <a href="../admin/adminValidateArticle" class="btn btn-success">valider l'article</a>
           <a href="articleContent/<?= $articles[$i]->getId() ?>" class="btn btn-primary">Lire l'article</a>
-          <a href="" class="btn btn-danger">Supprimer l'article</a>
+          <a href="../admin/adminDeletArticle" class="btn btn-danger">Supprimer l'article</a>
         </div>
       </div>
     </div>
-<?php endfor; ?>
+<?php 
+  /*}*/
+  endfor; 
+?>
