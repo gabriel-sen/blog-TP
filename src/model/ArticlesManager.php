@@ -128,25 +128,4 @@
             $statment->closeCursor();
             return $isChanged;
         }
-
-        public function requestDeletArticle($artId){
-            $req = "UPDATE articles set article_statut = 1 WHERE articles_id = :articles_id";
-            $statment = $this->getBdd()->prepare($req);
-            $statment->bindValue(":articles_id",$artId,PDO::PARAM_INT);
-            $statment->execute();
-            $isChanged = ($statment->rowCount() > 0);
-            //die(var_dump($isChanged));
-            $statment->closeCursor();
-            return $isChanged;
-        }
-        public function requestValidateArticle($artId){
-            $req = "UPDATE articles set article_statut = 2 WHERE articles_id = :articles_id";
-            $statment = $this->getBdd()->prepare($req);
-            $statment->bindValue(":articles_id",$artId,PDO::PARAM_INT);
-            $statment->execute();
-            $isChanged = ($statment->rowCount() > 0);
-            //die(var_dump($isChanged));
-            $statment->closeCursor();
-            return $isChanged;
-        }
     }

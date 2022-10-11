@@ -70,7 +70,7 @@
   <?php 
     for($i=0; $i < count($articles); $i++): 
       //echo $articles[$i]->getStatus()
-    if($articles[$i]->getStatus() == 2){
+    if($articles[$i]->getStatus() == 1){
   ?>
     <div class="card_articles col-md-4 container_articles">
       <div class="card">

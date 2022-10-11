@@ -90,9 +90,9 @@ try {
               break;
               case "articlesManagement" : $adminArticlesController->ArticlesManagement();
               break;
-              case "adminDeletArticle" : $adminArticlesController->AdminDeletArticle();
+              case "adminDeletArticle" : $adminArticlesController->AdminDeletArticle($_POST['article_id']);
               break;
-              case "adminValidateArticle" : $adminArticlesController->adminValidateArticle();
+              case "adminValidateArticle" : $adminArticlesController->adminValidateArticle($_POST['article_id']);
               break;
               case "commentsManagement" : $adminCommentsController-> CommentsManagement();
               break;

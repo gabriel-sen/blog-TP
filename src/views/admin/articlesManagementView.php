@@ -14,7 +14,7 @@
           if(empty($articles[$i]->getImage())){
             echo '<img src="'.$imgBase.'"class="card-img-top" alt="...">';
           }else {
-            echo '<img src="'.$articles[$i]->getImage().'" class="card-img-top" alt="...">';
+            echo '<img src="'.'.'.$articles[$i]->getImage().'" class="card-img-top" alt="...">';
           }
         ?>
         <div class="card-body">
@@ -35,9 +35,17 @@
               <p><?=$articles[$i]->getModificationDate()?></p>
             </div>
           </div>
-          <a href="../admin/adminValidateArticle" class="btn btn-success">valider l'article</a>
+          <form method="POST" action="<?= URL?>admin/adminValidateArticle">
+            <input name="article_id" value="<?=$articles[$i]->getId()?>" type="hidden">
+            <button class="btn btn-success" action="submit">valider l'article</button>
+          </form>
+
           <a href="articleContent/<?= $articles[$i]->getId() ?>" class="btn btn-primary">Lire l'article</a>
-          <a href="../admin/adminDeletArticle" class="btn btn-danger">Supprimer l'article</a>
+
+          <form method="POST" action="<?= URL?>admin/adminDeletArticle">
+            <input name="article_id" value="<?=$articles[$i]->getId()?>" type="hidden">
+            <button class="btn btn-danger" action="submit">Supprimer l'article</button>
+          </form>
         </div>
       </div>
     </div>
