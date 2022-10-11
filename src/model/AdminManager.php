@@ -10,7 +10,8 @@ class AdminManager extends MainManager{
         return $datas;
     }
     public function bdUpdateRoleuser($login,$role){
-        $req = "UPDATE user set role = :role WHERE email = :email ";
+        die(var_dump($role));
+        $req = "UPDATE user set role = :role  WHERE email = :email ";
         $statment = $this->getBdd()->prepare($req);
         $statment->bindValue(":email",$login,PDO::PARAM_STR);
         $statment->bindValue(":role",$role,PDO::PARAM_STR);
@@ -19,7 +20,16 @@ class AdminManager extends MainManager{
         $statment->closeCursor();
         return $isChanged;
     }
-
+    public function bdUpdateRoleAminToUser($login,$role){
+        $req = "UPDATE user set role = :role  WHERE email = :email ";
+        $statment = $this->getBdd()->prepare($req);
+        $statment->bindValue(":email",$login,PDO::PARAM_STR);
+        $statment->bindValue(":role",$role,PDO::PARAM_STR);
+        $statment->execute();
+        $isChanged = ($statment->rowCount() > 0);
+        $statment->closeCursor();
+        return $isChanged;
+    }
     public function requestDeletComment($comId){
         $req = "UPDATE comments set statut = 1 WHERE comment_id = :comment_id";
         $statment = $this->getBdd()->prepare($req);

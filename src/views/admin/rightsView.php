@@ -14,16 +14,22 @@
             <td><?php echo $user['username']; ?></td>
             <td><?php echo $user['email']; ?></td>
             <td>
-                <?php if($user['role'] === "admin") : ?>
-                    <?php echo $user['role']; ?>
-                    <?php else : ?>
-                        <form method="POST" action="<?= URL ?>admin/validateUpdateRole">
-                            <input type="hidden" name="login" value="<?=$user['email']?>" >
-                            <select class="form-select" name="role" onchange="confirm('confirmez-vous la modification?') ? submit() : document.location.reload()">
-                                <option value="user"<?=$user['role'] === "user" ? "selected" : ""?>>Utilisateur</option>
-                                <option value="admin"<?=$user['role'] === "admin" ? "selected" : ""?>>Admin</option>
-                        </form>
-                <?php endif ?>
+              <?php //die(var_dump($user['role'])) ?>
+                <form method="POST" action="<?= URL ?>admin/validateUpdateRole">
+                    <input type="hidden" name="login" value="<?=$user['email']?>" >
+                    <select class="form-select" name="role">
+                      <option selected value="<?=$user['role']?>">
+                          <?=$user['role']?>
+                      </option>
+                      <option value="<?=$user['role'] == "user"?>">
+                        Utilisateur
+                      </option>
+                      <option value="<?=$user['role'] == "admin"?>">
+                        Admin
+                      </option>
+                    </select>
+                    <button type="submit" onchange="confirm('confirmez-vous la modification?') ? submit() : document.location.reload()"> valider</button>
+                </form>
             </td>
             <td>
                 <?php 

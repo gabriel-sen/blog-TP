@@ -45,6 +45,5 @@ class ArticleController extends MainController{
         $this->articleManager->chargeArticles(); // 3) J'y charge les données de la BD
         $this->commentManager = new CommentsManager();
         $this->userManager = new UserManager();
-
     }
 }
