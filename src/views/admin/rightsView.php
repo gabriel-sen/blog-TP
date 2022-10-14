@@ -14,17 +14,17 @@
             <td><?php echo $user['username']; ?></td>
             <td><?php echo $user['email']; ?></td>
             <td>
-              <?php //die(var_dump($user['role'])) ?>
+              <?php //  die(var_dump($user['role'])) ?>
                 <form method="POST" action="<?= URL ?>admin/validateUpdateRole">
                     <input type="hidden" name="login" value="<?=$user['email']?>" >
                     <select class="form-select" name="role">
                       <option selected value="<?=$user['role']?>">
                           <?=$user['role']?>
                       </option>
-                      <option value="<?=$user['role'] == "user"?>">
+                      <option value="user">
                         Utilisateur
                       </option>
-                      <option value="<?=$user['role'] == "admin"?>">
+                      <option value="admin">
                         Admin
                       </option>
                     </select>

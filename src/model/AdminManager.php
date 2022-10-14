@@ -10,7 +10,7 @@ class AdminManager extends MainManager{
         return $datas;
     }
     public function bdUpdateRoleuser($login,$role){
-        die(var_dump($role));
+        //die(var_dump($role));
         $req = "UPDATE user set role = :role  WHERE email = :email ";
         $statment = $this->getBdd()->prepare($req);
         $statment->bindValue(":email",$login,PDO::PARAM_STR);

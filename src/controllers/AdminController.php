@@ -24,13 +24,12 @@
         }
 
         public function validateUpdateRole($login,$role){
-            die(var_dump($role['role'] ));
-            if($role == ($role['role'] == "admin")){
+           //die(var_dump($_POST['role'] ));
+            if($_POST['role'] == "user"){
                 $this->adminManager->bdUpdateRoleuser($login,$role);
-                
                 Toolbox::ajouterMessageAlerte("Vous êtes devenus Admin ", Toolbox::COULEUR_VERTE);
                 header("Location:".URL."admin/rights");
-            }elseif($role == ($role['role'] == "user")){
+            }elseif($_POST['role'] == "admin"){
                 $this->adminManager->bdUpdateRoleAminToUser($login,$role);
                 //die(var_dump($login));
                 Toolbox::ajouterMessageAlerte("Vous êtes revenus à un role User ", Toolbox::COULEUR_VERTE);
