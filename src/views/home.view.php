@@ -35,3 +35,4 @@ et l’ensemble des liens vers les réseaux sociaux où l’on peut vous suivre 
     <h2>Consuletez les réseaux sociaux :</h2>
     <a href="https://www.linkedin.com/in/gabriel-s-45013/" target="_blank" class="btn btn-primary"><span class="bi bi-linkedin"></span>  Lien vers profil linkedin </a>
   </div>
+  <?php //var_dump($_SESSION); ?>

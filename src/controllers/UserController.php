@@ -38,7 +38,7 @@
         public function profil(){
             $datas = $this->userManager->getUserInformation($_SESSION['profil']['login']);
             $_SESSION['profil']['username'] = $datas['username']; // Je stock en variable de session le username du profile via la requette de la fonction getUserInformation
-            $_SESSION['profil']['role'] = $datas['role'];
+            $_SESSION['role'] = $datas['role'];
             $_SESSION['profil']['img'] = $datas['img'];
             
             $data_page = [
@@ -53,6 +53,7 @@
         }
         public function logout(){
             unset($_SESSION['profil']); // supprime la variable de sesion de profile
+            session_destroy();
             Toolbox::ajouterMessageAlerte("La déconnection du profile est établie avec succès, à bientot :)", Toolbox::COULEUR_VERTE);
             header("Location:".URL."home");
         }

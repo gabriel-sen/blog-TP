@@ -11,14 +11,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?= URL; ?>articles">Articles</a>
             </li>
-            <?php if(!Security::islogged()) : ?>
+            <?php if(Security::isVisitor()) :?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= URL; ?>login">Se Connecter</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= URL; ?>creataccount">Créer un compte</a>
                 </li>
-            <?php else : ?>
+            <?php elseif(Security::isLogged()) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= URL; ?>compte/profil">Mon profil</a>
                 </li>
@@ -27,17 +27,18 @@
                 </li>
             <?php endif ; ?>
         </ul>
-        <?php if(Security::isLogged() && Security::isAdmin()): ?>
-        <div class="dropdown">
-            <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Administration
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="<?= URL; ?>admin/rights">Gérer les droits</a>
-                <a class="dropdown-item" href="<?= URL; ?>admin/articlesManagement">Gérer les articles</a>
-                <a class="dropdown-item" href="<?= URL; ?>admin/commentsManagement">Gérer les Commentaires</a>
+        <?php if(!empty($_SESSION['role']) && Security::isAdmin()):?>
+            <div class="dropdown">
+                <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Administration
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="<?= URL; ?>admin/rights">Gérer les droits</a>
+                    <a class="dropdown-item" href="<?= URL; ?>admin/articlesManagement">Gérer les articles</a>
+                    <a class="dropdown-item" href="<?= URL; ?>admin/commentsManagement">Gérer les Commentaires</a>
+                </div>
             </div>
-        </div>
-        <?php endif ; ?>
+        <?php endif; ?>
+        <?php //die(var_dump($_SESSION))?>
     </div>
     </nav>
