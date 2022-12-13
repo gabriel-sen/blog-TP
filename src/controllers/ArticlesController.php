@@ -20,9 +20,12 @@ class ArticlesController extends MainController{
     }
 
     public function afficherArticles(){
-        $dataIdUser = $this->userManager->getUserInformation($_SESSION['profil']['login']);
+        if(!empty($_SESSION['profil']['login'])){
+            $dataIdUser = $this->userManager->getUserInformation($_SESSION['profil']['login']);
+            $_SESSION['profil']['user_id'] = $dataIdUser['user_id'];
+        }
         $articles = $this->articlesManager->getArticles(); // 5) Je récupère tout mes articles que je stock dans ma variable .
-        $_SESSION['profil']['user_id'] = $dataIdUser['user_id'];
+        
         $data_page = [
             "bodyClass" => "articles",
             "page_description" => "Description de la page d'accueil",
@@ -32,7 +35,7 @@ class ArticlesController extends MainController{
             "template" => "src/views/template.view.php",
             "articles" => $articles,
             "myuuid" => $this->uuidGenerator(),
-            "user_id"=> $_SESSION['profil']['user_id'],
+            "user_id"=> !empty($_SESSION['profil']['user_id']),
         ];
         $this->genererPage($data_page);
     }

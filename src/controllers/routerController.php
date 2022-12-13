@@ -51,32 +51,27 @@ try {
   //die(var_dump($url));
   switch($page){
     case "compte" : 
-        if(!Security::islogged()){
-            Toolbox::ajouterMessageAlerte("Veuillez vous connécter", Toolbox::COULEUR_ROUGE);
-            header("Location:".URL.'login');
-        } else{
-            switch($url[1]){
-                case "profil": $userController->profil();
-                break;
-                case "logout": $userController->logout();
-                break;
-                case "validate_username_modification" : $userController-> validateUsernameModification(Security::secureHTML($_POST['username']));
-                break;
-                case "changePassword" : $userController-> changePassword();
-                break;
-                case "validation_modificationPassword" : $userController-> validation_modificationPassword();
-                break;
-                case "deletAccount" : $userController-> deletAccount();
-                break;
-                case "validationChangeProfileImage" : $userController-> changeImage($_FILES['img']);
-                break;
-                case "commentSubmition" : $commentController -> commentSubmition();
-                break;
-                case "addArticle" : $articlesController-> addArticle();
-                break;
-                default : throw new Exception("La page n'existe pas, "."<a href='../home'>retournez à l'accueil</a>");
-            }
-        }
+      switch($url[1]){
+          case "profil": $userController->profil();
+          break;
+          case "logout": $userController->logout();
+          break;
+          case "validate_username_modification" : $userController-> validateUsernameModification(Security::secureHTML($_POST['username']));
+          break;
+          case "changePassword" : $userController-> changePassword();
+          break;
+          case "validation_modificationPassword" : $userController-> validation_modificationPassword();
+          break;
+          case "deletAccount" : $userController-> deletAccount();
+          break;
+          case "validationChangeProfileImage" : $userController-> changeImage($_FILES['img']);
+          break;
+          case "commentSubmition" : $commentController -> commentSubmition();
+          break;
+          case "addArticle" : $articlesController-> addArticle();
+          break;
+          default : throw new Exception("La page n'existe pas, "."<a href='../home'>retournez à l'accueil</a>");
+      }
     break;
     case "admin" :
       if(!Security::isAdmin()){

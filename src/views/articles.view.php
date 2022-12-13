@@ -67,6 +67,7 @@
   </div>
   <!-- fin modal -->
 <?php endif ; ?>
+
   <?php 
     for($i=0; $i < count($articles); $i++): 
       //echo $articles[$i]->getStatus()
