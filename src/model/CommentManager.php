@@ -15,7 +15,6 @@
             $req->bindParam('articleId', $articleId, PDO::PARAM_INT);
             $req->execute();
             $comments = $req->fetchAll(PDO::FETCH_ASSOC);
-            //die(var_dump($comments));
             $req->closeCursor();
             
             $results = [];
@@ -43,7 +42,6 @@
         $statment->bindValue(":comment_text",$comment_text,PDO::PARAM_STR);
         $statment->bindValue(":comment_date",$comment_date,PDO::PARAM_STR);
         $statment->execute();
-        //die(var_dump($statment));
         $isChanged = ($statment->rowCount() > 0);
         $statment->closeCursor();
         return $isChanged;

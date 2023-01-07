@@ -15,7 +15,6 @@
         }
         public function getArticles(){
             return $this->articles;
-            //die(var_dump($this));
         }
         // AFFICHER ARTICLES 
         public function chargeArticles(){
@@ -27,7 +26,6 @@
                 );
             $req->execute();
             $myArticles = $req->fetchAll(PDO::FETCH_ASSOC);
-            //die(var_dump($myArticles[0]));
             $req->closeCursor();
             foreach($myArticles as $article){
 
@@ -61,7 +59,6 @@
             $req->bindParam('id', $id, PDO::PARAM_INT);
             $req->execute();
             $article = $req->fetch(PDO::FETCH_ASSOC);
-            //die(var_dump($article));
             $req->closeCursor();
             return new Article(
                 $article['articles_id'],
@@ -124,7 +121,6 @@
             $statment->bindValue(":article_statut",$article_statut,PDO::PARAM_INT);
             $statment->execute();
             $isChanged = ($statment->rowCount() > 0);
-            //die(var_dump($isChanged));
             $statment->closeCursor();
             return $isChanged;
         }
