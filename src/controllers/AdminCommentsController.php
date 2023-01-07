@@ -20,7 +20,7 @@ class AdminCommentsController extends MainController{
             "imgBase" => "./public/assets/images/article/articleBase.png",
             "titre" => "Liste des commentaires classés par Articles :",
             "view" => "src/views/admin/commentsManagementView.php",
-            "template" => "src/views/template.view.php",
+            "template" => "src/views/templateView.php",
             "articles" => $articles,
             
             //"article" => $article,

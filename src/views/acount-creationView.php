@@ -28,5 +28,5 @@
   $bodyClass = "login";
   $titre="Créer un compte";
   $content = ob_get_clean();
-  require "template.view.php";
+  require "templateView.php";
 ?>

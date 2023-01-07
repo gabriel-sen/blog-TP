@@ -17,8 +17,8 @@
                 "bodyClass" => "home",
                 "page_description" => "Description de la page d'accueil",
                 "titre" => "Titre de la page d'accueil",
-                "view" => "src/views/home.view.php",
-                "template" => "src/views/template.view.php",
+                "view" => "src/views/homeView.php",
+                "template" => "src/views/templateView.php",
             ];
             $this->genererPage($data_page);
         }
@@ -28,8 +28,8 @@
                 "bodyClass" => "page de connection",
                 "page_description" => "page de connection",
                 "titre" => "Login",
-                "view" => "src/views/login.view.php",
-                "template" => "src/views/template.view.php",
+                "view" => "src/views/loginView.php",
+                "template" => "src/views/templateView.php",
             ];
             $this->genererPage($data_page);
         }
@@ -39,8 +39,8 @@
                 "bodyClass" => "page de création de compte",
                 "page_description" => "page de création de compte",
                 "titre" => "Créez votre compte",
-                "view" => "src/views/creataccount.view.php",
-                "template" => "src/views/template.view.php",
+                "view" => "src/views/creataccountView.php",
+                "template" => "src/views/templateView.php",
             ];
             $this->genererPage($data_page);
         }

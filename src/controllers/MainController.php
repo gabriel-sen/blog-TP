@@ -22,8 +22,8 @@ abstract class MainController{
             "bodyClass" => "home",
             "page_description" => "Description de la page d'accueil",
             "titre" => "Titre de la page d'accueil",
-            "view" => "src/views/home.view.php",
-            "template" => "src/views/template.view.php",
+            "view" => "src/views/homeView.php",
+            "template" => "src/views/templateView.php",
         ];
         $this->genererPage($data_page);
     }
@@ -34,8 +34,8 @@ abstract class MainController{
             "page_description" => "Page permettant de gérer les erreurs",
             "titre" => "Page d'erreur",
             "msg" => $msg,
-            "view" => "src/views/erreur.view.php",
-            "template" => "src/views/template.view.php",
+            "view" => "src/views/erreurView.php",
+            "template" => "src/views/templateView.php",
             "content" => "La page désité d'existe pasn'existe pas"
         ];
         $this->genererPage($data_page);

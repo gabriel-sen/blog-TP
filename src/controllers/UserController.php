@@ -46,8 +46,8 @@
                 "page_description" => "Page de profil",
                 "userData" => $datas, // J'envoie les donnés à la vue
                 "titre" => "Page de profil de ".$_SESSION['profil']['username'],
-                "view" => "src/views/profil.view.php",
-                "template" => "src/views/template.view.php",
+                "view" => "src/views/profilView.php",
+                "template" => "src/views/templateView.php",
             ];
             $this->genererPage($data_page);
         }
@@ -140,8 +140,8 @@
                 "bodyClass" => "changePassword",
                 "page_description" => "Page de modification de Password",
                 "titre" => "Modification du mot de passe de ".$_SESSION['profil']['username'],
-                "view" => "src/views/changePassword.view.php",
-                "template" => "src/views/template.view.php",
+                "view" => "src/views/changePasswordView.php",
+                "template" => "src/views/templateView.php",
             ];
             $this->genererPage($data_page);
         }

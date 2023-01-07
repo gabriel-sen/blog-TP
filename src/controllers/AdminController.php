@@ -18,7 +18,7 @@
                 "titre" => "Gestion des rôles :",
                 "users"=> $users,
                 "view" => "src/views/admin/rightsView.php",
-                "template" => "src/views/template.view.php",
+                "template" => "src/views/templateView.php",
             ];
             $this->genererPage($data_page);
         }

@@ -15,7 +15,7 @@ class AdminArticlesController extends MainController{
             "imgBase" => "./public/assets/images/article/articleBase.png",
             "titre" => "Management des articles :",
             "view" => "src/views/admin/articlesManagementView.php",
-            "template" => "src/views/template.view.php",
+            "template" => "src/views/templateView.php",
             "articles" => $articles
         ];
         $this->genererPage($data_page);

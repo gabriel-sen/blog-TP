@@ -16,7 +16,7 @@ class ArticleController extends MainController{
                 "imgBase" => "../public/assets/images/article/articleBase.png",
                 "page_description" => "ceci est un article du blog de gabriel sen",
                 "view" => "src/views/articleView.php",
-                "template" => "src/views/template.view.php",
+                "template" => "src/views/templateView.php",
                 "article" => $article,
                 "articleId" => $article->getId(),
             ];
@@ -31,7 +31,7 @@ class ArticleController extends MainController{
                 "imgBase" => "../public/assets/images/article/articleBase.png",
                 "page_description" => "ceci est un article du blog de gabriel sen",
                 "view" => "src/views/articleView.php",
-                "template" => "src/views/template.view.php",
+                "template" => "src/views/templateView.php",
                 "article" => $article,
                 "articleId" => $article->getId(),
                 "user_id"=> $_SESSION['profil']['user_id'], 
