@@ -32,7 +32,7 @@
         public function commentSubmition(){        
             $id = $this->userManager->getUserInformation($_SESSION['profil']['login']);
             $_SESSION['profil']['user_id'] = $id['user_id'];  
-            $this->CommentManager->sendComments();
+            //$this->CommentManager->sendComments();
         }
         // PROFILE
         public function profil(){
@@ -98,14 +98,14 @@
             $user = $this->userManager->getUserInformation($login);
             $this->sendMailValidation($login,$user['email'],$user['clef']);
             //die(var_dump($this));
-            header("Location:".URL.'login');
+            header("Location:".URL.'home');
 
         }
         // ACTIVATION DU COMPTE
         public function Validation_mailAccount($login,$key){
             if($this->userManager->dbValidationMailAccount($login,$key)){
                 Toolbox::ajouterMessageAlerte("Le compte à été activé.", Toolbox::COULEUR_VERTE);
-                header("Location:".URL."compte/profil");
+                header("Location:".URL."login");
             } else{
                 Toolbox::ajouterMessageAlerte("Le compte n'as pas été activé.", Toolbox::COULEUR_ROUGE);
                 header("Location:".URL.'login');

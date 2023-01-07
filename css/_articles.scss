@@ -4,3 +4,15 @@
         flex-direction: column;
     }
 }
+
+.card_articles{
+    .card{
+        .card_img{
+            height: 20rem;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

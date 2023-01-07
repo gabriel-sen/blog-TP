@@ -75,13 +75,15 @@
   ?>
     <div class="card_articles col-md-4 container_articles">
       <div class="card">
-        <?php
-          if(empty($articles[$i]->getImage())){
-            echo '<img src="'.$imgBase.'"class="card-img-top" alt="...">';
-          }else {
-            echo '<img src="'.$articles[$i]->getImage().'" class="card-img-top" alt="...">';
-          }
-        ?>
+        <div class="card_img">
+          <?php
+            if(empty($articles[$i]->getImage())){
+              echo '<img src="'.$imgBase.'"class="card-img-top" alt="...">';
+            }else {
+              echo '<img src="'.$articles[$i]->getImage().'" class="card-img-top" alt="...">';
+            }
+          ?>
+          </div>
         <div class="card-body">
           <h5 class="card-title"><?=$articles[$i]->getTitle()?></h5>
           <p class="card-text"><?=$articles[$i]->getTexte()?></p>
