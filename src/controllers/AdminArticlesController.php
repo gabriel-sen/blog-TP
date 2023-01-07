@@ -24,14 +24,12 @@ class AdminArticlesController extends MainController{
 
     public function AdminDeletArticle($artId){
         $artId = $_POST['article_id'];
-        //die(var_dump($artId));
         $this->adminManager->requestDeletArticle($artId);
         Toolbox::ajouterMessageAlerte("Article supprimé .", Toolbox::COULEUR_VERTE);
         header("Location:".URL.'admin/articlesManagement');
     }
     public function AdminValidateArticle($artId){
         $artId = $_POST['article_id'];
-        //die(var_dump($artId));
         $this->adminManager->requestValidateArticle($artId);
         Toolbox::ajouterMessageAlerte("Article validé .", Toolbox::COULEUR_VERTE);
         header("Location:".URL.'admin/articlesManagement');

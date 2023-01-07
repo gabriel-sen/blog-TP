@@ -14,7 +14,6 @@
             <td><?php echo $user['username']; ?></td>
             <td><?php echo $user['email']; ?></td>
             <td>
-              <?php //  die(var_dump($user['role'])) ?>
                 <form method="POST" action="<?= URL ?>admin/validateUpdateRole">
                     <input type="hidden" name="login" value="<?=$user['email']?>" >
                     <select class="form-select" name="role">

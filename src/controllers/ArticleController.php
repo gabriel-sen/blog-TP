@@ -23,7 +23,6 @@ class ArticleController extends MainController{
             $this->genererPage($data_page);
         } else{
             $dataIdUser = $this->userManager->getUserInformation($_SESSION['profil']['login']);
-            //die(var_dump($dataIdUser));
             $_SESSION['profil']['username'] = $dataIdUser['username'];
             $_SESSION['profil']['user_id'] = $dataIdUser['user_id'];
             $data_page = [
@@ -43,7 +42,7 @@ class ArticleController extends MainController{
     public function __construct(){ // 1) au moment de la construction
         $this->articleManager = new ArticlesManager(new CommentsManager); // 2) J'instantie un nouvel article depuis son objet
         $this->articleManager->chargeArticles(); // 3) J'y charge les données de la BD
-        $this->commentManager = new CommentsManager();
+        //$this->commentManager = new CommentsManager();
         $this->userManager = new UserManager();
     }
 }

@@ -39,6 +39,5 @@
                 </div>
             </div>
         <?php endif; ?>
-        <?php //die(var_dump($_SESSION))?>
     </div>
     </nav>

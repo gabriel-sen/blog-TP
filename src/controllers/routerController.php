@@ -48,7 +48,6 @@ try {
       $url = explode("/", filter_var($_GET['page'],FILTER_SANITIZE_URL)); // accéder à des sous dossier pour les compte/profile
       $page = $url[0]; // On stock sous forme de tableau le bon switch case de chaque pages
   }
-  //die(var_dump($url));
   switch($page){
     case "compte" : 
       switch($url[1]){

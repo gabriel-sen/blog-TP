@@ -57,7 +57,6 @@ class ArticlesController extends MainController{
         $img = $img.$random;
         $dir = $img."/".$article_image['name'];
 
-        //die(var_dump($img));
         if (!file_exists($repository.$img)){
             mkdir($repository.$img, 0700);
         }

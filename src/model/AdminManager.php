@@ -10,7 +10,6 @@ class AdminManager extends MainManager{
         return $datas;
     }
     public function bdUpdateRoleuser($login,$role){
-        //die(var_dump($role));
         $req = "UPDATE user set role = :role  WHERE email = :email ";
         $statment = $this->getBdd()->prepare($req);
         $statment->bindValue(":email",$login,PDO::PARAM_STR);
@@ -36,7 +35,6 @@ class AdminManager extends MainManager{
         $statment->bindValue(":comment_id",$comId,PDO::PARAM_INT);
         $statment->execute();
         $isChanged = ($statment->rowCount() > 0);
-        //die(var_dump($isChanged));
         $statment->closeCursor();
         return $isChanged;
     }
@@ -46,7 +44,6 @@ class AdminManager extends MainManager{
         $statment->bindValue(":comment_id",$comId,PDO::PARAM_INT);
         $statment->execute();
         $isChanged = ($statment->rowCount() > 0);
-        //die(var_dump($isChanged));
         $statment->closeCursor();
         return $isChanged;
     }
@@ -56,7 +53,6 @@ class AdminManager extends MainManager{
         $statment->bindValue(":articles_id",$artId,PDO::PARAM_INT);
         $statment->execute();
         $isChanged = ($statment->rowCount() > 0);
-        //die(var_dump($isChanged));
         $statment->closeCursor();
         return $isChanged;
     }
@@ -66,7 +62,6 @@ class AdminManager extends MainManager{
         $statment->bindValue(":articles_id",$artId,PDO::PARAM_INT);
         $statment->execute();
         $isChanged = ($statment->rowCount() > 0);
-        //die(var_dump($isChanged));
         $statment->closeCursor();
         return $isChanged;
     }

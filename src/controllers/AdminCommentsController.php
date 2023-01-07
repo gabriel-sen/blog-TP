@@ -13,7 +13,6 @@ class AdminCommentsController extends MainController{
     public function commentsManagement(){
         $articles = $this->articlesManager->getArticles();
         
-        //die(var_dump($articles));
         $data_page = [
             "bodyClass" => "admin_commantaire",
             "page_description" => "",
@@ -23,22 +22,18 @@ class AdminCommentsController extends MainController{
             "template" => "src/views/templateView.php",
             "articles" => $articles,
             
-            //"article" => $article,
-            //"articleId" => $article->getId(),
         ];
         $this->genererPage($data_page);
     }
 
     public function deletComment(){
         $comId = $_POST['com_id'];
-        //die(var_dump($comId));
         $this->adminManager->requestDeletComment($comId);
         Toolbox::ajouterMessageAlerte("Commentaire supprimé.", Toolbox::COULEUR_VERTE);
         header("Location:".URL.'admin/commentsManagement');
     }
     public function validateComment(){
         $comId = $_POST['com_id'];
-        //die(var_dump($comId));
         $this->adminManager->requestValidateComment($comId);
         Toolbox::ajouterMessageAlerte("Commentaire validé.", Toolbox::COULEUR_VERTE);
         header("Location:".URL.'admin/commentsManagement');

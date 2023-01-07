@@ -10,13 +10,15 @@
     
     <div class="card_articles col-md-4 container_articles">
       <div class="card">
-        <?php
-          if(empty($articles[$i]->getImage())){
-            echo '<img src="'.$imgBase.'"class="card-img-top" alt="...">';
-          }else {
-            echo '<img src="'.'.'.$articles[$i]->getImage().'" class="card-img-top" alt="...">';
-          }
-        ?>
+        <div class="card_img">
+          <?php
+            if(empty($articles[$i]->getImage())){
+              echo '<img src="'.$imgBase.'"class="card-img-top" alt="...">';
+            }else {
+              echo '<img src="'.'.'.$articles[$i]->getImage().'" class="card-img-top" alt="...">';
+            }
+          ?>
+        </div>
         <div class="card-body">
           <h5 class="card-title"><?=$articles[$i]->getTitle()?></h5>
           <p class="card-text"><?=$articles[$i]->getTexte()?></p>
@@ -39,8 +41,6 @@
             <input name="article_id" value="<?=$articles[$i]->getId()?>" type="hidden">
             <button class="btn btn-success" action="submit">valider l'article</button>
           </form>
-
-          <a href="articleContent/<?= $articles[$i]->getId() ?>" class="btn btn-primary">Lire l'article</a>
 
           <form method="POST" action="<?= URL?>admin/adminDeletArticle">
             <input name="article_id" value="<?=$articles[$i]->getId()?>" type="hidden">

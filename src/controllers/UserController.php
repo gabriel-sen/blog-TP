@@ -97,7 +97,6 @@
         public function resendMail($login){
             $user = $this->userManager->getUserInformation($login);
             $this->sendMailValidation($login,$user['email'],$user['clef']);
-            //die(var_dump($this));
             header("Location:".URL.'home');
 
         }
@@ -114,11 +113,8 @@
         public function validationLogin(){
             if(!empty($_POST['login']) && !empty($_POST['password'])){
                 $login = Security::secureHTML($_POST['login']);
-                //die(var_dump($login));
                 $password = Security::secureHTML($_POST['password']);
-                //die(var_dump($password));
                 $this->validation_login($login,$password);
-                //die(var_dump($userController));
             } else{
                 Toolbox::ajouterMessageAlerte("login ou mot de passe incorecte ", Toolbox::COULEUR_ROUGE);
                 header("Location:".URL.'login');
@@ -200,7 +196,6 @@
                     $this->fileUserImgDelet($_SESSION['profil']['login']);
                     // on ajoute la nouvel image dans la BD
                     $nameImageforBd = "profils/".$_SESSION['profil']['login']."/".$nameImage; // URL de l'image stocké en BD
-                    //var_dump($nameImageforBd);
                     if($this->userManager->dbAddImg($_SESSION['profil']['login'],$nameImageforBd)){
                         Toolbox::ajouterMessageAlerte("Image correctement ajouté en Base de donnée.", Toolbox::COULEUR_VERTE);
                         header("Location:".URL."compte/profil");
